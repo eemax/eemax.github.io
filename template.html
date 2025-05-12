@@ -105,14 +105,6 @@
         .material-title {
           font-weight: 600;
           color: var(--text-primary);
-          max-width: 70%;
-        }
-        
-        .material-title-content {
-          display: inline;
-          word-wrap: break-word;
-          word-break: break-word;
-          hyphens: auto;
         }
         
         .material-percentage {
@@ -143,6 +135,17 @@
         .material-value {
           font-weight: 500;
           color: var(--text-primary);
+        }
+        
+        .material-composition {
+          margin-bottom: 0.75rem;
+          font-weight: 500;
+          font-size: 1.05rem;
+          color: var(--text-primary);
+        }
+        
+        .material-details {
+          margin-bottom: 0.375rem;
         }
         
         /* Responsive adjustments */
@@ -182,7 +185,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="product-title">[product name product color and product size is the product_description]</h1>
+        <h1 class="product-title">[product_description]</h1>
         
         <div class="card">
             <div class="card-header">
@@ -232,10 +235,12 @@
                 <div class="material-block">
                     <div class="material-header">
                         <h3 class="material-title">
-                            <span id="material1-placement">[material1_placement]</span>:
-                            <span class="material-title-content" id="material1-composition">[material1_composition]</span>
+                            <span id="material1-placement">[material1_placement]</span>
                         </h3>
-                        <span class="material-percentage" id="material1-percentage">100%</span>
+                        <span class="material-percentage" id="material1-percentage">[material1_percentage]</span>
+                    </div>
+                    <div class="material-composition">
+                        <span id="material1-composition">[material1_composition]</span>
                     </div>
                     <div class="material-divider"></div>
                     <div class="material-details">
@@ -262,10 +267,12 @@
                 <div class="material-block">
                     <div class="material-header">
                         <h3 class="material-title">
-                            <span id="material2-placement">[material2_placement]</span>:
-                            <span class="material-title-content" id="material2-composition">[material2_composition]</span>
+                            <span id="material2-placement">[material2_placement]</span>
                         </h3>
                         <span class="material-percentage" id="material2-percentage">[material2_percentage]</span>
+                    </div>
+                    <div class="material-composition">
+                        <span id="material2-composition">[material2_composition]</span>
                     </div>
                     <div class="material-divider"></div>
                     <div class="material-details">
