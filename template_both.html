@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product Passport for [product_name] - Detailed supply chain and sustainability information">
+    <title>Product Passport - [product_name]</title>
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #34495E;
+            --accent: #E67E22;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-primary: #2C3E50;
+            --text-secondary: #7F8C8D;
+            --border-color: #ECF0F1;
+            --warm-gray: #F5F5F5;
+            --warm-gray-dark: #E0E0E0;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --radius: 0.5rem;
+            --transition: all 0.2s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                max-width: 48rem;
+            }
+        }
+        
+        /* Section Styling */
+        .section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 1rem;
+            background: var(--warm-gray);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-header h2 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .section-content.active {
+            max-height: 2000px;
+        }
+        
+        .section-content-inner {
+            padding: 1rem;
+        }
+        
+        /* Product Section */
+        .product-section {
+            background: var(--warm-gray);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-image-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .product-info {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .product-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-icons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        @media (min-width: 480px) {
+            .product-icons {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .product-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--bg-color);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .product-icon img {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Material Section */
+        .material-section {
+            background: var(--warm-gray);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .material-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .material-icons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        @media (min-width: 480px) {
+            .material-icons {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* Care Instructions */
+        .care-section {
+            background: var(--warm-gray);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .care-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Supply Chain Section */
+        .supply-chain-section {
+            background: var(--warm-gray);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .supply-chain-icons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        
+        @media (min-width: 480px) {
+            .supply-chain-icons {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .certification-icons {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        /* Life Cycle Assessment */
+        .lca-section {
+            background: var(--warm-gray);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .lca-icons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        
+        @media (min-width: 480px) {
+            .lca-icons {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* Common Components */
+        .icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--bg-color);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .icon-container img {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .icon-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Map Container */
+        .map-container {
+            height: 300px;
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Detail Items */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+        
+        @media (min-width: 480px) {
+            .detail-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .detail-item {
+            padding: 0.75rem;
+            background: var(--bg-color);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .detail-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .detail-value {
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .purchase-order-bar {
+            background: var(--warm-gray);
+            color: var(--text-primary);
+            font-weight: 600;
+            border-radius: var(--radius);
+            padding: 0.75rem 1rem;
+            margin: 1rem 0 1.25rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .supply-chain-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        @media (min-width: 600px) {
+            .supply-chain-steps {
+                flex-direction: row;
+            }
+        }
+        .supply-chain-step {
+            display: flex;
+            align-items: center;
+            background: var(--warm-gray);
+            border-radius: var(--radius);
+            padding: 0.75rem 1rem;
+            flex: 1;
+            min-width: 0;
+            gap: 1rem;
+        }
+        .step-icon img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 4px;
+        }
+        .step-label {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.02em;
+        }
+        .step-detail {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+        .certification-pills {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .cert-pill {
+            background: var(--warm-gray);
+            border-radius: 2rem;
+            padding: 0.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+        .cert-pill img {
+            height: 28px;
+            width: auto;
+            display: block;
+        }
+        .cert-link a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            margin-left: 0.5rem;
+            font-size: 1rem;
+        }
+        .cert-link a:hover {
+            text-decoration: underline;
+        }
+        .supply-chain-steps-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        .supply-chain-step-vertical {
+            display: flex;
+            align-items: flex-start;
+            background: var(--warm-gray);
+            border-radius: var(--radius);
+            padding: 0.75rem 1rem;
+            gap: 1rem;
+        }
+        .step-icon-square {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+        }
+        .step-icon-square img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+        .step-info-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .certification-squares {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .cert-square {
+            background: var(--bg-color);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            width: 48px;
+            height: 48px;
+            justify-content: center;
+        }
+        .cert-square img {
+            height: 32px;
+            width: 32px;
+            object-fit: contain;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Product Section -->
+        <section class="product-section">
+            <div class="product-image-container">
+                <img src="[asset1_productimage_path]" alt="[product_name]" class="product-image">
+            </div>
+            <div class="product-info">
+                <h1 class="product-title">[product_name]</h1>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Color</div>
+                        <div class="detail-value">[product_color]</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Size</div>
+                        <div class="detail-value">[product_sizes]</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">HS Code</div>
+                        <div class="detail-value">[product_htscode]</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">EAN Code</div>
+                        <div class="detail-value">[ean_code]</div>
+                    </div>
+                </div>
+                <div class="product-icons">
+                    <div class="icon-container">
+                        <img src="[prod_mat_cert_1]" alt="Product Certification 1">
+                        <span class="icon-label">Certification 1</span>
+                    </div>
+                    <div class="icon-container">
+                        <img src="[prod_mat_cert_2]" alt="Product Certification 2">
+                        <span class="icon-label">Certification 2</span>
+                    </div>
+                    <div class="icon-container">
+                        <img src="[prod_mat_cert_3]" alt="Product Certification 3">
+                        <span class="icon-label">Certification 3</span>
+                    </div>
+                    <div class="icon-container">
+                        <img src="[prod_mat_cert_4]" alt="Product Certification 4">
+                        <span class="icon-label">Certification 4</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Description -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Product Description</h2>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <p>[product_text]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Material Information -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Material Information</h2>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <!-- Material 1 -->
+                    <div class="material-section">
+                        <div class="material-header">
+                            <h3 class="material-title">[material1_material_type]</h3>
+                            <span class="material-percentage">[material1_percentage]</span>
+                        </div>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">Placement</div>
+                                <div class="detail-value">[material1_placement]</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Composition</div>
+                                <div class="detail-value">[material1_composition]</div>
+                            </div>
+                        </div>
+                        <div class="material-icons">
+                            <div class="icon-container">
+                                <img src="[material_cert_1]" alt="Material Certification 1">
+                                <span class="icon-label">Material Cert 1</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="[prod_mat_cert_1]" alt="Product Material Cert 1">
+                                <span class="icon-label">Product Material Cert 1</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="[prod_mat_cert_2]" alt="Product Material Cert 2">
+                                <span class="icon-label">Product Material Cert 2</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="[prod_mat_cert_3]" alt="Product Material Cert 3">
+                                <span class="icon-label">Product Material Cert 3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material 2 -->
+                    <div class="material-section">
+                        <div class="material-header">
+                            <h3 class="material-title">[material2_material_type]</h3>
+                            <span class="material-percentage">[material2_percentage]</span>
+                        </div>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">Placement</div>
+                                <div class="detail-value">[material2_placement]</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Composition</div>
+                                <div class="detail-value">[material2_composition]</div>
+                            </div>
+                        </div>
+                        <div class="material-icons">
+                            <div class="icon-container">
+                                <img src="[material_cert_2]" alt="Material Certification 2">
+                                <span class="icon-label">Material Cert 2</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="[prod_mat_cert_4]" alt="Product Material Cert 4">
+                                <span class="icon-label">Product Material Cert 4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Care Instructions -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Care Instructions</h2>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="care-section">
+                        <div class="care-icon">
+                            <img src="[care_icons]" alt="Care Instructions">
+                        </div>
+                        <p>[care_instructions]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supply Chain - Transparency -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Supply Chain - Transparency</h2>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="supply-chain-section">
+                        <div class="map-container" id="map"></div>
+                        <div class="purchase-order-bar">
+                            Purchase Order: <b>[purchase_order]</b>
+                        </div>
+                        <div class="supply-chain-steps-vertical">
+                            <div class="supply-chain-step-vertical">
+                                <div class="step-icon-square"><img src="[supply_chain_icon_1]" alt="Garment Production"></div>
+                                <div class="step-info-vertical">
+                                    <div class="step-label">GARMENT PRODUCTION</div>
+                                    <div class="step-detail">[product_factory]<br>[product_factory_country]</div>
+                                </div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="step-icon-square"><img src="[supply_chain_icon_2]" alt="Fabric Production"></div>
+                                <div class="step-info-vertical">
+                                    <div class="step-label">FABRIC PRODUCTION</div>
+                                    <div class="step-detail">[material1_fabric_tier2]</div>
+                                </div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="step-icon-square"><img src="[supply_chain_icon_3]" alt="Yarn Production"></div>
+                                <div class="step-info-vertical">
+                                    <div class="step-label">YARN PRODUCTION</div>
+                                    <div class="step-detail">[material1_yarn_tier3]</div>
+                                </div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="step-icon-square"><img src="[supply_chain_icon_4]" alt="Raw Material"></div>
+                                <div class="step-info-vertical">
+                                    <div class="step-label">RAW MATERIAL</div>
+                                    <div class="step-detail">[material1_raw_tier4]</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="certification-squares">
+                            <span class="cert-square"><img src="[supply_chain_cert_1]" alt="Cert 1"></span>
+                            <span class="cert-square"><img src="[supply_chain_cert_2]" alt="Cert 2"></span>
+                            <span class="cert-square"><img src="[supply_chain_cert_3]" alt="Cert 3"></span>
+                            <span class="cert-link"><a href="[certification_pdf]" target="_blank">Click to view certificates</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life Cycle Assessment -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Life Cycle Assessment</h2>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="lca-section">
+                        <div class="lca-icons">
+                            <div class="icon-container">
+                                <img src="[lca_icon_1]" alt="LCA Icon 1">
+                                <span class="icon-label">LCA 1</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="[lca_icon_2]" alt="LCA Icon 2">
+                                <span class="icon-label">LCA 2</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="[lca_icon_3]" alt="LCA Icon 3">
+                                <span class="icon-label">LCA 3</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="[lca_icon_4]" alt="LCA Icon 4">
+                                <span class="icon-label">LCA 4</span>
+                            </div>
+                        </div>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">Carbon Emission</div>
+                                <div class="detail-value">[lca_carbon_emission]</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Water Use</div>
+                                <div class="detail-value">[lca_water_use]</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Energy Consumption</div>
+                                <div class="detail-value">[lca_energy_consumption]</div>
+                            </div>
+                        </div>
+                        <p class="lca-disclaimer">[lca_disclaimer]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Repairability -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Repairability</h2>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <p>[repairability]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- End of Life -->
+        <section class="section">
+            <div class="section-header">
+                <h2>End of Life</h2>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <p>[end_of_life]</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize map
+        document.addEventListener('DOMContentLoaded', function() {
+            const map = L.map('map').setView([0, 0], 2);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        });
+
+        // Section toggle functionality
+        document.querySelectorAll('.section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html> 
