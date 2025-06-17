@@ -550,6 +550,19 @@
         .cert-square {
             background: none !important;
         }
+        .toggle-icon {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-left: auto;
+            transition: color 0.2s;
+            color: var(--text-secondary);
+            user-select: none;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -604,6 +617,7 @@
         <section class="section">
             <div class="section-header">
                 <h2>Product Description</h2>
+                <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
@@ -616,6 +630,7 @@
         <section class="section">
             <div class="section-header">
                 <h2>Material Information</h2>
+                <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
@@ -689,6 +704,7 @@
         <section class="section">
             <div class="section-header">
                 <h2>Care Instructions</h2>
+                <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
@@ -706,6 +722,7 @@
         <section class="section">
             <div class="section-header">
                 <h2>Supply Chain - Transparency</h2>
+                <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
@@ -759,6 +776,7 @@
         <section class="section">
             <div class="section-header">
                 <h2>Life Cycle Assessment</h2>
+                <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
@@ -813,6 +831,7 @@
         <section class="section">
             <div class="section-header">
                 <h2>Repairability</h2>
+                <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
@@ -825,6 +844,7 @@
         <section class="section">
             <div class="section-header">
                 <h2>End of Life</h2>
+                <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
@@ -848,6 +868,12 @@
             header.addEventListener('click', () => {
                 const content = header.nextElementSibling;
                 content.classList.toggle('active');
+                const icon = header.querySelector('.toggle-icon');
+                if (content.classList.contains('active')) {
+                    icon.textContent = '−';
+                } else {
+                    icon.textContent = '+';
+                }
             });
         });
     </script>
