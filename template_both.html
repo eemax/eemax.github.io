@@ -458,6 +458,71 @@
             object-fit: contain;
             display: block;
         }
+        .product-details-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+        }
+        .detail-card {
+            min-width: 120px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 0.75rem 1rem;
+            flex: 0 0 auto;
+            text-align: center;
+        }
+        .materials-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+        }
+        .material-card {
+            min-width: 260px;
+            background: var(--warm-gray);
+            border-radius: var(--radius);
+            padding: 1rem;
+            flex: 0 0 auto;
+            box-shadow: var(--shadow-sm);
+        }
+        .lca-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+        }
+        .lca-card {
+            min-width: 120px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1rem 0.5rem;
+            flex: 0 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lca-card img {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 0.5rem;
+        }
+        .lca-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+        .lca-value {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -469,20 +534,20 @@
             </div>
             <div class="product-info">
                 <h1 class="product-title">[product_name]</h1>
-                <div class="detail-grid">
-                    <div class="detail-item">
+                <div class="product-details-scroll">
+                    <div class="detail-card">
                         <div class="detail-label">Color</div>
                         <div class="detail-value">[product_color]</div>
                     </div>
-                    <div class="detail-item">
+                    <div class="detail-card">
                         <div class="detail-label">Size</div>
                         <div class="detail-value">[product_sizes]</div>
                     </div>
-                    <div class="detail-item">
+                    <div class="detail-card">
                         <div class="detail-label">HS Code</div>
                         <div class="detail-value">[product_htscode]</div>
                     </div>
-                    <div class="detail-item">
+                    <div class="detail-card">
                         <div class="detail-label">EAN Code</div>
                         <div class="detail-value">[ean_code]</div>
                     </div>
@@ -527,66 +592,65 @@
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
-                    <!-- Material 1 -->
-                    <div class="material-section">
-                        <div class="material-header">
-                            <h3 class="material-title">[material1_material_type]</h3>
-                            <span class="material-percentage">[material1_percentage]</span>
-                        </div>
-                        <div class="detail-grid">
-                            <div class="detail-item">
-                                <div class="detail-label">Placement</div>
-                                <div class="detail-value">[material1_placement]</div>
+                    <div class="materials-scroll">
+                        <div class="material-card">
+                            <div class="material-header">
+                                <h3 class="material-title">[material1_material_type]</h3>
+                                <span class="material-percentage">[material1_percentage]</span>
                             </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Composition</div>
-                                <div class="detail-value">[material1_composition]</div>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">Placement</div>
+                                    <div class="detail-value">[material1_placement]</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Composition</div>
+                                    <div class="detail-value">[material1_composition]</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="material-icons">
-                            <div class="icon-container">
-                                <img src="[material_cert_1]" alt="Material Certification 1">
-                                <span class="icon-label">Material Cert 1</span>
-                            </div>
-                            <div class="icon-container">
-                                <img src="[prod_mat_cert_1]" alt="Product Material Cert 1">
-                                <span class="icon-label">Product Material Cert 1</span>
-                            </div>
-                            <div class="icon-container">
-                                <img src="[prod_mat_cert_2]" alt="Product Material Cert 2">
-                                <span class="icon-label">Product Material Cert 2</span>
-                            </div>
-                            <div class="icon-container">
-                                <img src="[prod_mat_cert_3]" alt="Product Material Cert 3">
-                                <span class="icon-label">Product Material Cert 3</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Material 2 -->
-                    <div class="material-section">
-                        <div class="material-header">
-                            <h3 class="material-title">[material2_material_type]</h3>
-                            <span class="material-percentage">[material2_percentage]</span>
-                        </div>
-                        <div class="detail-grid">
-                            <div class="detail-item">
-                                <div class="detail-label">Placement</div>
-                                <div class="detail-value">[material2_placement]</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Composition</div>
-                                <div class="detail-value">[material2_composition]</div>
+                            <div class="material-icons">
+                                <div class="icon-container">
+                                    <img src="[material_cert_1]" alt="Material Certification 1">
+                                    <span class="icon-label">Material Cert 1</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="[prod_mat_cert_1]" alt="Product Material Cert 1">
+                                    <span class="icon-label">Product Material Cert 1</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="[prod_mat_cert_2]" alt="Product Material Cert 2">
+                                    <span class="icon-label">Product Material Cert 2</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="[prod_mat_cert_3]" alt="Product Material Cert 3">
+                                    <span class="icon-label">Product Material Cert 3</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="material-icons">
-                            <div class="icon-container">
-                                <img src="[material_cert_2]" alt="Material Certification 2">
-                                <span class="icon-label">Material Cert 2</span>
+                        <div class="material-card">
+                            <div class="material-header">
+                                <h3 class="material-title">[material2_material_type]</h3>
+                                <span class="material-percentage">[material2_percentage]</span>
                             </div>
-                            <div class="icon-container">
-                                <img src="[prod_mat_cert_4]" alt="Product Material Cert 4">
-                                <span class="icon-label">Product Material Cert 4</span>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">Placement</div>
+                                    <div class="detail-value">[material2_placement]</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Composition</div>
+                                    <div class="detail-value">[material2_composition]</div>
+                                </div>
+                            </div>
+                            <div class="material-icons">
+                                <div class="icon-container">
+                                    <img src="[material_cert_2]" alt="Material Certification 2">
+                                    <span class="icon-label">Material Cert 2</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="[prod_mat_cert_4]" alt="Product Material Cert 4">
+                                    <span class="icon-label">Product Material Cert 4</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -690,18 +754,26 @@
                                 <span class="icon-label">LCA 4</span>
                             </div>
                         </div>
-                        <div class="detail-grid">
-                            <div class="detail-item">
-                                <div class="detail-label">Carbon Emission</div>
-                                <div class="detail-value">[lca_carbon_emission]</div>
+                        <div class="lca-scroll">
+                            <div class="lca-card">
+                                <img src="[lca_icon_1]" alt="LCA Icon 1">
+                                <div class="lca-label">Carbon Emission</div>
+                                <div class="lca-value">[lca_carbon_emission]</div>
                             </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Water Use</div>
-                                <div class="detail-value">[lca_water_use]</div>
+                            <div class="lca-card">
+                                <img src="[lca_icon_2]" alt="LCA Icon 2">
+                                <div class="lca-label">Water Use</div>
+                                <div class="lca-value">[lca_water_use]</div>
                             </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Energy Consumption</div>
-                                <div class="detail-value">[lca_energy_consumption]</div>
+                            <div class="lca-card">
+                                <img src="[lca_icon_3]" alt="LCA Icon 3">
+                                <div class="lca-label">Energy Consumption</div>
+                                <div class="lca-value">[lca_energy_consumption]</div>
+                            </div>
+                            <div class="lca-card">
+                                <img src="[lca_icon_4]" alt="LCA Icon 4">
+                                <div class="lca-label">Other</div>
+                                <div class="lca-value"></div>
                             </div>
                         </div>
                         <p class="lca-disclaimer">[lca_disclaimer]</p>
