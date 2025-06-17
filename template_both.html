@@ -458,70 +458,56 @@
             object-fit: contain;
             display: block;
         }
-        .product-details-scroll {
+        .product-details-scroll,
+        .materials-scroll,
+        .lca-scroll {
             display: flex;
             overflow-x: auto;
             gap: 1rem;
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
+            padding: 0.5rem 0.5rem 0.5rem 1rem;
+            scroll-snap-type: x mandatory;
+            position: relative;
         }
-        .detail-card {
-            min-width: 120px;
+        .product-details-scroll::after,
+        .materials-scroll::after,
+        .lca-scroll::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 32px;
+            height: 100%;
+            pointer-events: none;
+            background: linear-gradient(to left, var(--bg-color) 80%, transparent 100%);
+            z-index: 1;
+        }
+        .detail-card,
+        .material-card,
+        .lca-card {
+            min-width: 80vw;
+            max-width: 320px;
             background: var(--bg-color);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
             padding: 0.75rem 1rem;
             flex: 0 0 auto;
             text-align: center;
-        }
-        .materials-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
+            box-shadow: var(--shadow);
+            margin-right: 1rem;
+            scroll-snap-align: start;
+            position: relative;
+            z-index: 2;
         }
         .material-card {
-            min-width: 260px;
             background: var(--warm-gray);
-            border-radius: var(--radius);
             padding: 1rem;
-            flex: 0 0 auto;
-            box-shadow: var(--shadow-sm);
-        }
-        .lca-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
         }
         .lca-card {
-            min-width: 120px;
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
             padding: 1rem 0.5rem;
-            flex: 0 0 auto;
-            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        .lca-card img {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 0.5rem;
-        }
-        .lca-label {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.25rem;
-        }
-        .lca-value {
-            font-size: 1rem;
-            color: var(--text-primary);
-            font-weight: 500;
         }
     </style>
 </head>
