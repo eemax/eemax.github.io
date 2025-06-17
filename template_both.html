@@ -14,41 +14,27 @@
             --primary: #2C3E50;
             --secondary: #34495E;
             --accent: #E67E22;
-            --bg-color: #ffffff;
-            --card-bg: #ffffff;
+            --bg-color: #fff;
             --text-primary: #2C3E50;
             --text-secondary: #7F8C8D;
             --border-color: #ECF0F1;
-            --warm-gray: #F5F5F5;
-            --warm-gray-dark: #E0E0E0;
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-            --shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 2px 4px rgba(0,0,0,0.05);
             --radius: 0.5rem;
-            --transition: all 0.2s ease;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
+            background: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-        
         .container {
             width: 100vw;
             max-width: 100vw;
             margin: 0;
             padding: 0;
         }
-        
         @media (min-width: 768px) {
             .container {
                 max-width: 48rem;
@@ -56,10 +42,7 @@
                 padding: 1rem;
             }
         }
-        
-        /* Section Styling */
-        .section,
-        .product-section {
+        .section, .product-section {
             background: none !important;
             border-radius: 0;
             margin: 0;
@@ -67,503 +50,58 @@
             border: none;
             border-top: 1px solid var(--border-color);
         }
-        .section:first-child,
-        .product-section:first-child {
-            border-top: none;
-        }
+        .section:first-child, .product-section:first-child { border-top: none; }
         @media (min-width: 768px) {
-            .section,
-            .product-section {
+            .section, .product-section {
                 border-radius: var(--radius);
                 margin: initial;
                 padding: 0.5rem;
-                background: var(--card-bg);
+                background: var(--bg-color);
                 border: 1px solid var(--border-color);
                 border-top: 1px solid var(--border-color);
             }
         }
-        .section-header,
-        .section-content-inner,
-        .product-section .product-info,
-        .product-section .product-image-container {
+        .section-header, .section-content-inner, .product-section .product-info, .product-section .product-image-container {
             padding: 0.15rem 0.5rem;
         }
         @media (min-width: 768px) {
-            .section-header,
-            .section-content-inner,
-            .product-section .product-info,
-            .product-section .product-image-container {
+            .section-header, .section-content-inner, .product-section .product-info, .product-section .product-image-container {
                 padding: 1rem 1.5rem;
             }
         }
-        
         .section-header {
-            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background: var(--bg-color) !important;
             box-shadow: var(--shadow-sm);
             border-radius: var(--radius);
             margin: 0.25rem 0;
             color: var(--text-primary);
             cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             user-select: none;
             border-bottom: 1px solid var(--border-color);
         }
-        
         .section-header h2 {
             font-size: 1.125rem;
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .section-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-        
-        .section-content.active {
-            max-height: 2000px;
-        }
-        
-        .section-content-inner {
-            padding: 1rem;
-        }
-        
-        /* Product Section */
-        .product-section {
-            background: var(--warm-gray);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .product-image-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto 1.5rem;
-        }
-        
-        .product-image {
-            width: 100%;
-            height: auto;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        
-        .product-info {
-            display: grid;
-            gap: 1rem;
-        }
-        
-        .product-title {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .product-icons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        @media (min-width: 480px) {
-            .product-icons {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        .product-icon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 0.75rem;
-            background: var(--bg-color);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-        }
-        
-        .product-icon img {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Material Section */
-        .material-section {
-            background: var(--warm-gray);
-            border-radius: var(--radius);
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .material-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .material-icons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-        
-        @media (min-width: 480px) {
-            .material-icons {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        /* Care Instructions */
-        .care-section {
-            background: var(--warm-gray);
-            border-radius: var(--radius);
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .care-icon {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* Supply Chain Section */
-        .supply-chain-section {
-            background: var(--warm-gray);
-            border-radius: var(--radius);
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .supply-chain-icons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-            margin: 1rem 0;
-        }
-        
-        @media (min-width: 480px) {
-            .supply-chain-icons {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        .certification-icons {
-            display: flex;
-            gap: 1rem;
-            margin: 1rem 0;
-            flex-wrap: wrap;
-        }
-        
-        /* Life Cycle Assessment */
-        .lca-section {
-            background: var(--warm-gray);
-            border-radius: var(--radius);
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .lca-icons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-            margin: 1rem 0;
-        }
-        
-        @media (min-width: 480px) {
-            .lca-icons {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        /* Common Components */
-        .icon-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 0.75rem;
-            background: var(--bg-color);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-        }
-        
-        .icon-container img {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 0.5rem;
-        }
-        
-        .icon-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-        
-        /* Map Container */
-        .map-container {
-            height: 300px;
-            border-radius: var(--radius);
-            margin: 1rem 0;
-            border: 1px solid var(--border-color);
-        }
-        
-        /* Detail Items */
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
-        }
-        
-        @media (min-width: 480px) {
-            .detail-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        .detail-item {
-            padding: 0.75rem;
-            background: var(--bg-color);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-        }
-        
-        .detail-label {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-        
-        .detail-value {
-            color: var(--text-primary);
-            font-weight: 400;
-        }
-
-        .purchase-order-bar {
-            background: var(--warm-gray);
-            color: var(--text-primary);
-            font-weight: 600;
-            border-radius: var(--radius);
-            padding: 0.75rem 1rem;
-            margin: 1rem 0 1.25rem 0;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-        .supply-chain-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-bottom: 1.25rem;
-        }
-        @media (min-width: 600px) {
-            .supply-chain-steps {
-                flex-direction: row;
-            }
-        }
-        .supply-chain-step {
-            display: flex;
-            align-items: center;
-            background: var(--warm-gray);
-            border-radius: var(--radius);
-            padding: 0.75rem 1rem;
-            flex: 1;
-            min-width: 0;
-            gap: 1rem;
-        }
-        .step-icon img {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            padding: 4px;
-        }
-        .step-label {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            margin-bottom: 0.25rem;
-            letter-spacing: 0.02em;
-        }
-        .step-detail {
-            font-size: 0.95rem;
-            color: var(--text-primary);
-        }
-        .certification-pills {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .cert-pill {
-            background: var(--warm-gray);
-            border-radius: 2rem;
-            padding: 0.5rem 1.25rem;
-            display: flex;
-            align-items: center;
-            box-shadow: var(--shadow-sm);
-        }
-        .cert-pill img {
-            height: 28px;
-            width: auto;
-            display: block;
-        }
-        .cert-link a {
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-            margin-left: 0.5rem;
-            font-size: 1rem;
-        }
-        .cert-link a:hover {
-            text-decoration: underline;
-        }
-        .supply-chain-steps-vertical {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1.25rem;
-        }
-        .supply-chain-step-vertical {
-            display: flex;
-            align-items: flex-start;
-            background: var(--bg-color) !important;
-            box-shadow: var(--shadow-sm);
-            border-radius: var(--radius);
-            padding: 0.75rem 1rem;
-            gap: 1rem;
-            margin: 0.25rem 0;
-        }
-        .step-icon-square {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            flex-shrink: 0;
-        }
-        .step-icon-square img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-        }
-        .step-info-vertical {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .certification-squares {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .cert-square {
-            background: var(--bg-color);
-            border-radius: 0.5rem;
-            padding: 0.5rem;
-            display: flex;
-            align-items: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-            width: 48px;
-            height: 48px;
-            justify-content: center;
-        }
-        .cert-square img {
-            height: 32px;
-            width: 32px;
-            object-fit: contain;
-            display: block;
-        }
-        .product-details-scroll,
-        .materials-scroll,
-        .lca-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-            scroll-snap-type: x mandatory;
-            position: relative;
-            scroll-padding-left: 20vw;
-            scroll-padding-right: 20vw;
-        }
-        .product-details-scroll::after,
-        .materials-scroll::after,
-        .lca-scroll::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 32px;
-            height: 100%;
-            pointer-events: none;
-            background: linear-gradient(to left, var(--bg-color) 80%, transparent 100%);
-            z-index: 1;
-        }
-        .detail-card,
-        .material-card,
-        .lca-card {
-            min-width: 60vw;
-            max-width: 220px;
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            padding: 0.75rem 1rem;
-            flex: 0 0 auto;
-            text-align: center;
-            box-shadow: var(--shadow);
-            margin-right: 1rem;
-            scroll-snap-align: center;
-            position: relative;
-            z-index: 2;
-        }
-        .product-details-scroll > *:last-child,
-        .materials-scroll > *:last-child,
-        .lca-scroll > *:last-child {
-            margin-right: 0;
-        }
-        .material-card,
-        .care-section,
-        .supply-chain-section,
-        .lca-section,
-        .cert-square {
-            background: none !important;
+            margin: 0;
         }
         .toggle-icon {
             font-size: 1.5rem;
             font-weight: 700;
             margin-left: auto;
-            transition: color 0.2s;
             color: var(--text-secondary);
             user-select: none;
         }
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s;
         }
-        .desc-care-scroll {
+        .section-content.active { max-height: 2000px; }
+        /* Flippable/Scrollable Cards (shared) */
+        .product-details-scroll, .materials-scroll, .lca-scroll, .desc-care-scroll {
             display: flex;
             overflow-x: auto;
             gap: 1rem;
@@ -574,7 +112,11 @@
             scroll-padding-left: 1rem;
             scroll-padding-right: 1rem;
         }
-        .desc-care-card {
+        .product-details-scroll > *:last-child,
+        .materials-scroll > *:last-child,
+        .lca-scroll > *:last-child,
+        .desc-care-scroll > *:last-child { margin-right: 0; }
+        .detail-card, .material-card, .lca-card, .desc-care-card {
             min-width: 60vw;
             max-width: 220px;
             background: var(--bg-color);
@@ -593,19 +135,35 @@
             flex-direction: column;
             align-items: center;
         }
-        .desc-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-        .desc-text {
-            font-size: 1rem;
-            color: var(--text-primary);
-        }
-        .desc-care-scroll > *:last-child {
-            margin-right: 0;
-        }
+        .desc-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .desc-text { font-size: 1rem; color: var(--text-primary); }
+        .lca-card img { width: 32px; height: 32px; margin-bottom: 0.5rem; }
+        .lca-label { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.25rem; }
+        .lca-value { font-size: 1rem; color: var(--text-primary); font-weight: 500; }
+        .product-section .product-title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .product-section .product-image { width: 100%; max-width: 400px; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+        .product-icons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem; }
+        @media (min-width: 480px) { .product-icons { grid-template-columns: repeat(4, 1fr); } }
+        .icon-container { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0.75rem; background: var(--bg-color); border-radius: var(--radius); border: 1px solid var(--border-color); }
+        .icon-container img { width: 32px; height: 32px; margin-bottom: 0.5rem; }
+        .icon-label { font-size: 0.875rem; color: var(--text-secondary); }
+        .map-container { height: 300px; border-radius: var(--radius); margin: 1rem 0; border: 1px solid var(--border-color); }
+        .detail-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+        @media (min-width: 480px) { .detail-grid { grid-template-columns: repeat(2, 1fr); } }
+        .detail-item { padding: 0.75rem; background: var(--bg-color); border-radius: var(--radius); border: 1px solid var(--border-color); }
+        .detail-label { color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
+        .detail-value { color: var(--text-primary); font-weight: 400; }
+        .purchase-order-bar { color: var(--text-primary); font-weight: 600; border-radius: var(--radius); padding: 0.75rem 1rem; margin: 1rem 0 1.25rem 0; text-align: center; font-size: 1.1rem; border: 1px solid var(--border-color); background: var(--bg-color); }
+        .supply-chain-steps-vertical { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.25rem; }
+        .supply-chain-step-vertical { display: flex; align-items: flex-start; background: var(--bg-color) !important; box-shadow: var(--shadow-sm); border-radius: var(--radius); padding: 0.75rem 1rem; gap: 1rem; margin: 0.25rem 0; }
+        .step-icon-square { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 0.5rem; flex-shrink: 0; }
+        .step-icon-square img { width: 32px; height: 32px; object-fit: contain; }
+        .step-info-vertical { display: flex; flex-direction: column; justify-content: center; }
+        .certification-squares { display: flex; gap: 1rem; justify-content: center; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; }
+        .cert-square { background: var(--bg-color); border-radius: 0.5rem; padding: 0.5rem; display: flex; align-items: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); width: 48px; height: 48px; justify-content: center; }
+        .cert-square img { height: 32px; width: 32px; object-fit: contain; display: block; }
+        .cert-link a { color: var(--primary); font-weight: 600; text-decoration: none; margin-left: 0.5rem; font-size: 1rem; }
+        .cert-link a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
