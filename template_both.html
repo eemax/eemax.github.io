@@ -465,9 +465,11 @@
             overflow-x: auto;
             gap: 1rem;
             margin-bottom: 1rem;
-            padding: 0.5rem 0.5rem 0.5rem 1rem;
+            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
             scroll-snap-type: x mandatory;
             position: relative;
+            scroll-padding-left: 20vw;
+            scroll-padding-right: 20vw;
         }
         .product-details-scroll::after,
         .materials-scroll::after,
@@ -485,8 +487,8 @@
         .detail-card,
         .material-card,
         .lca-card {
-            min-width: 80vw;
-            max-width: 320px;
+            min-width: 60vw;
+            max-width: 220px;
             background: var(--bg-color);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
@@ -495,9 +497,14 @@
             text-align: center;
             box-shadow: var(--shadow);
             margin-right: 1rem;
-            scroll-snap-align: start;
+            scroll-snap-align: center;
             position: relative;
             z-index: 2;
+        }
+        .product-details-scroll > *:last-child,
+        .materials-scroll > *:last-child,
+        .lca-scroll > *:last-child {
+            margin-right: 0;
         }
         .material-card {
             background: var(--warm-gray);
