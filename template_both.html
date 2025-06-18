@@ -42,6 +42,20 @@
                 padding: 1rem;
             }
         }
+        @media (min-width: 900px) {
+            .container {
+                max-width: 64rem;
+            }
+            .product-image {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .detail-card, .material-card, .lca-card, .desc-care-card {
+                min-width: 320px;
+                max-width: 340px;
+            }
+        }
         .section, .product-section {
             background: none !important;
             border-radius: 0;
@@ -104,44 +118,70 @@
         .product-details-scroll, .materials-scroll, .lca-scroll, .desc-care-scroll {
             display: flex;
             overflow-x: auto;
-            gap: 1rem;
+            gap: 0.5rem;
             margin-bottom: 1rem;
-            padding: 0.5rem 0.5rem 0.5rem 1rem;
+            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
             scroll-snap-type: x mandatory;
             position: relative;
-            scroll-padding-left: 1rem;
-            scroll-padding-right: 1rem;
+            scroll-padding-left: 0.5rem;
+            scroll-padding-right: 0.5rem;
         }
         .product-details-scroll > *:last-child,
         .materials-scroll > *:last-child,
         .lca-scroll > *:last-child,
         .desc-care-scroll > *:last-child { margin-right: 0; }
         .detail-card, .material-card, .lca-card, .desc-care-card {
-            min-width: 60vw;
-            max-width: 220px;
+            width: 100%;
+            min-width: 80vw;
+            max-width: 340px;
             background: var(--bg-color);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
             padding: 0.75rem 1rem;
             flex: 0 0 auto;
-            text-align: center;
             box-shadow: var(--shadow);
-            margin-right: 1rem;
+            margin-right: 0.25rem;
             scroll-snap-align: center;
             scroll-snap-stop: always;
             position: relative;
             z-index: 2;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: stretch;
         }
-        .desc-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary); }
-        .desc-text { font-size: 1rem; color: var(--text-primary); }
+        @media (min-width: 600px) {
+            .detail-card, .material-card, .lca-card, .desc-care-card {
+                min-width: 320px;
+                max-width: 340px;
+            }
+        }
+        @media (min-width: 900px) {
+            .container {
+                max-width: 64rem;
+            }
+            .product-image {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        .desc-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            text-align: left;
+        }
+        .desc-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+            text-align: left;
+        }
         .lca-card img { width: 32px; height: 32px; margin-bottom: 0.5rem; }
         .lca-label { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.25rem; }
         .lca-value { font-size: 1rem; color: var(--text-primary); font-weight: 500; }
         .product-section .product-title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .product-section .product-image { width: 100%; max-width: 400px; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+        .product-section .product-image { width: 100%; max-width: 400px; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); display: block; margin-left: auto; margin-right: auto; }
         .product-icons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem; }
         @media (min-width: 480px) { .product-icons { grid-template-columns: repeat(4, 1fr); } }
         .icon-container { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0.75rem; background: var(--bg-color); border-radius: var(--radius); border: 1px solid var(--border-color); }
@@ -164,53 +204,37 @@
         .cert-square img { height: 32px; width: 32px; object-fit: contain; display: block; }
         .cert-link a { color: var(--primary); font-weight: 600; text-decoration: none; margin-left: 0.5rem; font-size: 1rem; }
         .cert-link a:hover { text-decoration: underline; }
+        .inline-icons-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .inline-icons-row img {
+            height: 48px;
+            width: auto;
+            max-width: 64px;
+            flex: 1 1 0;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Product Section -->
         <section class="product-section">
-            <div class="product-image-container">
-                <img src="[asset1_productimage_path]" alt="[product_name]" class="product-image">
-            </div>
-            <div class="product-info">
+            <div class="product-info" style="margin-bottom:0.5rem;">
                 <h1 class="product-title">[product_name]</h1>
-                <div class="product-details-scroll">
-                    <div class="detail-card">
-                        <div class="detail-label">Color</div>
-                        <div class="detail-value">[product_color]</div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-label">Size</div>
-                        <div class="detail-value">[product_sizes]</div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-label">HS Code</div>
-                        <div class="detail-value">[product_htscode]</div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-label">EAN Code</div>
-                        <div class="detail-value">[ean_code]</div>
-                    </div>
-                </div>
-                <div class="product-icons">
-                    <div class="icon-container">
-                        <img src="[prod_mat_cert_1]" alt="Product Certification 1">
-                        <span class="icon-label">Certification 1</span>
-                    </div>
-                    <div class="icon-container">
-                        <img src="[prod_mat_cert_2]" alt="Product Certification 2">
-                        <span class="icon-label">Certification 2</span>
-                    </div>
-                    <div class="icon-container">
-                        <img src="[prod_mat_cert_3]" alt="Product Certification 3">
-                        <span class="icon-label">Certification 3</span>
-                    </div>
-                    <div class="icon-container">
-                        <img src="[prod_mat_cert_4]" alt="Product Certification 4">
-                        <span class="icon-label">Certification 4</span>
-                    </div>
-                </div>
+            </div>
+            <div class="product-image-container">
+                <img src="public/product_image.png" alt="[product_name]" class="product-image">
+            </div>
+            <div class="product-certifications inline-icons-row" style="margin:0.5rem 0;">
+                <img src="public/product_material_cert_1.png" alt="Product Certification 1">
+                <img src="public/product_material_cert_2.png" alt="Product Certification 2">
+                <img src="public/product_material_cert_3.png" alt="Product Certification 3">
+                <img src="public/product_material_cert_4.png" alt="Product Certification 4">
             </div>
         </section>
 
@@ -224,15 +248,36 @@
                 <div class="section-content-inner">
                     <div class="desc-care-scroll">
                         <div class="desc-care-card">
+                            <div class="desc-title">Product Details</div>
+                            <div class="product-details-inline" style="display:flex;flex-direction:column;gap:0.5rem;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-label" style="text-align:left;">Color:</span>
+                                    <span class="detail-value" style="text-align:right;">[product_color]</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-label" style="text-align:left;">Size:</span>
+                                    <span class="detail-value" style="text-align:right;">[product_sizes]</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-label" style="text-align:left;">HS Code:</span>
+                                    <span class="detail-value" style="text-align:right;">[product_htscode]</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-label" style="text-align:left;">EAN Code:</span>
+                                    <span class="detail-value" style="text-align:right;">[ean_code]</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="desc-care-card">
                             <div class="desc-title">Product Description</div>
                             <div class="desc-text">[product_text]</div>
                         </div>
                         <div class="desc-care-card">
                             <div class="desc-title">Care Instructions</div>
-                            <div class="care-icon" style="margin-bottom:0.5rem;">
-                                <img src="[care_icons]" alt="Care Instructions" style="width:32px;height:32px;">
+                            <div style="display:flex;align-items:center;gap:0.5rem;">
+                                <img src="public/care_icon.png" alt="Care Instructions" style="width:24px;height:24px;display:inline-block;">
+                                <div class="desc-text" style="text-align:left;">[care_instructions]</div>
                             </div>
-                            <div class="desc-text">[care_instructions]</div>
                         </div>
                     </div>
                 </div>
@@ -263,23 +308,11 @@
                                     <div class="detail-value">[material1_composition]</div>
                                 </div>
                             </div>
-                            <div class="material-icons">
-                                <div class="icon-container">
-                                    <img src="[material_cert_1]" alt="Material Certification 1">
-                                    <span class="icon-label">Material Cert 1</span>
-                                </div>
-                                <div class="icon-container">
-                                    <img src="[prod_mat_cert_1]" alt="Product Material Cert 1">
-                                    <span class="icon-label">Product Material Cert 1</span>
-                                </div>
-                                <div class="icon-container">
-                                    <img src="[prod_mat_cert_2]" alt="Product Material Cert 2">
-                                    <span class="icon-label">Product Material Cert 2</span>
-                                </div>
-                                <div class="icon-container">
-                                    <img src="[prod_mat_cert_3]" alt="Product Material Cert 3">
-                                    <span class="icon-label">Product Material Cert 3</span>
-                                </div>
+                            <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
+                                <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
+                                <img src="public/product_material_cert_2.png" alt="Product Material Cert 2">
+                                <img src="public/product_material_cert_3.png" alt="Product Material Cert 3">
+                                <img src="public/product_material_cert_4.png" alt="Product Material Cert 4">
                             </div>
                         </div>
                         <div class="material-card">
@@ -297,15 +330,11 @@
                                     <div class="detail-value">[material2_composition]</div>
                                 </div>
                             </div>
-                            <div class="material-icons">
-                                <div class="icon-container">
-                                    <img src="[material_cert_2]" alt="Material Certification 2">
-                                    <span class="icon-label">Material Cert 2</span>
-                                </div>
-                                <div class="icon-container">
-                                    <img src="[prod_mat_cert_4]" alt="Product Material Cert 4">
-                                    <span class="icon-label">Product Material Cert 4</span>
-                                </div>
+                            <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
+                                <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
+                                <img src="public/product_material_cert_2.png" alt="Product Material Cert 2">
+                                <img src="public/product_material_cert_3.png" alt="Product Material Cert 3">
+                                <img src="public/product_material_cert_4.png" alt="Product Material Cert 4">
                             </div>
                         </div>
                     </div>
@@ -328,39 +357,47 @@
                         </div>
                         <div class="supply-chain-steps-vertical">
                             <div class="supply-chain-step-vertical">
-                                <div class="step-icon-square"><img src="[supply_chain_icon_1]" alt="Garment Production"></div>
+                                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                                    <img src="public/supply_chain_icon_1.png" alt="Garment Production" style="height:32px;width:auto;">
+                                    <span class="step-label">GARMENT PRODUCTION</span>
+                                </span>
                                 <div class="step-info-vertical">
-                                    <div class="step-label">GARMENT PRODUCTION</div>
                                     <div class="step-detail">[product_factory]<br>[product_factory_country]</div>
                                 </div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <div class="step-icon-square"><img src="[supply_chain_icon_2]" alt="Fabric Production"></div>
+                                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                                    <img src="public/supply_chain_icon_2.png" alt="Fabric Production" style="height:32px;width:auto;">
+                                    <span class="step-label">FABRIC PRODUCTION</span>
+                                </span>
                                 <div class="step-info-vertical">
-                                    <div class="step-label">FABRIC PRODUCTION</div>
                                     <div class="step-detail">[material1_fabric_tier2]</div>
                                 </div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <div class="step-icon-square"><img src="[supply_chain_icon_3]" alt="Yarn Production"></div>
+                                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                                    <img src="public/supply_chain_icon_3.png" alt="Yarn Production" style="height:32px;width:auto;">
+                                    <span class="step-label">YARN PRODUCTION</span>
+                                </span>
                                 <div class="step-info-vertical">
-                                    <div class="step-label">YARN PRODUCTION</div>
                                     <div class="step-detail">[material1_yarn_tier3]</div>
                                 </div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <div class="step-icon-square"><img src="[supply_chain_icon_4]" alt="Raw Material"></div>
+                                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                                    <img src="public/supply_chain_icon_4.png" alt="Raw Material" style="height:32px;width:auto;">
+                                    <span class="step-label">RAW MATERIAL</span>
+                                </span>
                                 <div class="step-info-vertical">
-                                    <div class="step-label">RAW MATERIAL</div>
                                     <div class="step-detail">[material1_raw_tier4]</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="certification-squares">
-                            <span class="cert-square"><img src="[supply_chain_cert_1]" alt="Cert 1"></span>
-                            <span class="cert-square"><img src="[supply_chain_cert_2]" alt="Cert 2"></span>
-                            <span class="cert-square"><img src="[supply_chain_cert_3]" alt="Cert 3"></span>
-                            <span class="cert-link"><a href="[certification_pdf]" target="_blank">Click to view certificates</a></span>
+                        <div class="certification-squares inline-icons-row" style="margin-top:1.5rem;justify-content:center;">
+                            <img src="public/supply_chain_cert_1.png" alt="Cert 1">
+                            <img src="public/supply_chain_cert_2.png" alt="Cert 2">
+                            <img src="public/supply_chain_cert_3.png" alt="Cert 3">
+                            <span class="cert-link"><a href="public/certification.pdf" target="_blank">Click to view certificates</a></span>
                         </div>
                     </div>
                 </div>
@@ -376,42 +413,30 @@
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="lca-section">
-                        <div class="lca-icons">
-                            <div class="icon-container">
-                                <img src="[lca_icon_1]" alt="LCA Icon 1">
-                                <span class="icon-label">LCA 1</span>
-                            </div>
-                            <div class="icon-container">
-                                <img src="[lca_icon_2]" alt="LCA Icon 2">
-                                <span class="icon-label">LCA 2</span>
-                            </div>
-                            <div class="icon-container">
-                                <img src="[lca_icon_3]" alt="LCA Icon 3">
-                                <span class="icon-label">LCA 3</span>
-                            </div>
-                            <div class="icon-container">
-                                <img src="[lca_icon_4]" alt="LCA Icon 4">
-                                <span class="icon-label">LCA 4</span>
-                            </div>
+                        <div class="lca-icons" style="display:flex;gap:0.5rem;align-items:center;justify-content:flex-start;margin:0.5rem 0;">
+                            <img src="public/lca_icon_1.png" alt="LCA Icon 1" style="height:32px;width:auto;">
+                            <img src="public/lca_icon_2.png" alt="LCA Icon 2" style="height:32px;width:auto;">
+                            <img src="public/lca_icon_3.png" alt="LCA Icon 3" style="height:32px;width:auto;">
+                            <img src="public/lca_icon_4.png" alt="LCA Icon 4" style="height:32px;width:auto;">
                         </div>
                         <div class="lca-scroll">
                             <div class="lca-card">
-                                <img src="[lca_icon_1]" alt="LCA Icon 1">
+                                <img src="public/lca_icon_1.png" alt="LCA Icon 1">
                                 <div class="lca-label">Carbon Emission</div>
                                 <div class="lca-value">[lca_carbon_emission]</div>
                             </div>
                             <div class="lca-card">
-                                <img src="[lca_icon_2]" alt="LCA Icon 2">
+                                <img src="public/lca_icon_2.png" alt="LCA Icon 2">
                                 <div class="lca-label">Water Use</div>
                                 <div class="lca-value">[lca_water_use]</div>
                             </div>
                             <div class="lca-card">
-                                <img src="[lca_icon_3]" alt="LCA Icon 3">
+                                <img src="public/lca_icon_3.png" alt="LCA Icon 3">
                                 <div class="lca-label">Energy Consumption</div>
                                 <div class="lca-value">[lca_energy_consumption]</div>
                             </div>
                             <div class="lca-card">
-                                <img src="[lca_icon_4]" alt="LCA Icon 4">
+                                <img src="public/lca_icon_4.png" alt="LCA Icon 4">
                                 <div class="lca-label">Other</div>
                                 <div class="lca-value"></div>
                             </div>
@@ -473,4 +498,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
