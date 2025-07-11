@@ -1,0 +1,7 @@
+<- [[Notes directory]]
+# History is always right
+Consider how the great movements and beliefs of the past, which we might now regard with confusion or even moral condemnation, were in fact the perfect crystallization of human understanding at that time. The divine right of monarchs, the institution of slavery, the persecution of heretics - these were not mere aberrations but rather the authentic expression of humanity's position along its grand trajectory of development.
+
+Thus, history must always be "right" in the profound sense that it perfectly captures the true state of human consciousness, knowledge, and moral development at each moment. Like rings in a tree that tell the story of its growth, each historical epoch bears witness to exactly where our species stood in its understanding of itself and the world. The fact that we may later judge these positions as misguided or ethically wanting does not diminish their fundamental rightness as accurate reflections of humanity's position at that time.
+
+In this light, history becomes not merely a chronicle of events but rather a perfect mirror of our species' journey through time - each moment exactly as it had to be, given the sum total of human knowledge, beliefs, and capabilities at that instant. We cannot expect our ancestors to have transcended the boundaries of their collective consciousness anymore than we can fault a child for not possessing the wisdom of an adult.
