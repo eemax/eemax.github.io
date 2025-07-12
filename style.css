@@ -13,7 +13,7 @@ body {
     min-width: 350px;
     max-width: 350px;
     background-color: #fff;
-    padding: 20px;
+    padding: 20px 10px;
     border-right: 1px solid #ddd;
     overflow-y: auto;
     transition: transform 0.3s ease;
@@ -174,8 +174,8 @@ body {
     font-size: 0.9rem;
     padding: 1px 0;
     transition: background-color 0.1s ease;
-    word-wrap: break-word;
-    white-space: normal;
+    white-space: nowrap;
+    overflow: hidden;
     text-indent: 0;
     padding-left: 0;
 }
