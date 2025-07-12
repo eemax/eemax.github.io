@@ -1,4 +1,1 @@
-```dataview
-list from [[Index]]
-sort file.name asc
-```
+[Review](Random%20Access%20Memories/Review.md)

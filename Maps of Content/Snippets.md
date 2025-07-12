@@ -1,3 +1,3 @@
 - [[Index]]
-- [[SwiftEdit]]
+- [[Random Access Memories/Inbox/SwiftEdit]]
 - [cobalt](Organized%20Text/Web%20Clipper/cobalt.md)

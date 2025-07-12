@@ -1,4 +1,4 @@
-<- [[Notes directory]]
+<- [[Random Access Memories/Inbox/Text Storage/Notes directory]]
 # History is always right
 Consider how the great movements and beliefs of the past, which we might now regard with confusion or even moral condemnation, were in fact the perfect crystallization of human understanding at that time. The divine right of monarchs, the institution of slavery, the persecution of heretics - these were not mere aberrations but rather the authentic expression of humanity's position along its grand trajectory of development.
 

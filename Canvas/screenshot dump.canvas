@@ -1,6 +1,6 @@
 {
 	"nodes":[
-		{"id":"715c84069e4221f4","type":"file","file":"Anchor and Archive/Attachments/Pasted image 20241209142755.png","x":-640,"y":-380,"width":805,"height":340}
+		{"id":"5cb645dc0066cd67","x":-362,"y":-240,"width":250,"height":60,"type":"text","text":"Test"}
 	],
 	"edges":[]
 }
