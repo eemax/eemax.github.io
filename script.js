@@ -472,7 +472,16 @@ function updateMobileTitle(notePath) {
 // --- Event Listeners ---
 
 // Re-load the note content when the URL hash changes (user clicks a link)
-window.addEventListener('hashchange', loadNote);
+window.addEventListener('hashchange', () => {
+    loadNote();
+    // Re-apply iOS scroll fix when navigating
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        setTimeout(() => {
+            document.getElementById('sidebar').style.webkitOverflowScrolling = 'touch';
+            document.getElementById('content').style.webkitOverflowScrolling = 'touch';
+        }, 100);
+    }
+});
 
 // Build the menu and load the initial note when the page first loads
 document.addEventListener('DOMContentLoaded', () => {
@@ -491,4 +500,12 @@ document.addEventListener('DOMContentLoaded', () => {
             closeMobileMenu();
         }
     });
+    
+    // Simple iOS scroll fix
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        setTimeout(() => {
+            document.getElementById('sidebar').style.webkitOverflowScrolling = 'touch';
+            document.getElementById('content').style.webkitOverflowScrolling = 'touch';
+        }, 100);
+    }
 });
