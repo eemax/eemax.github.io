@@ -288,6 +288,57 @@ function addCopyButtonsToCodeBlocks() {
 }
 
 /**
+ * Converts YAML to GitHub-style table format
+ */
+function yamlToTable(yamlText) {
+    const lines = yamlText.split('\n');
+    const tableRows = [];
+    
+    lines.forEach(line => {
+        const trimmedLine = line.trim();
+        if (trimmedLine && !trimmedLine.startsWith('#')) {
+            const colonIndex = trimmedLine.indexOf(':');
+            if (colonIndex > 0) {
+                const key = trimmedLine.substring(0, colonIndex).trim();
+                let value = trimmedLine.substring(colonIndex + 1).trim();
+                
+                // Handle array values
+                if (value.startsWith('[') && value.endsWith(']')) {
+                    value = value.replace(/[\[\]]/g, '').split(',').map(item => 
+                        `<code>${item.trim()}</code>`
+                    ).join(', ');
+                }
+                // Handle empty values
+                else if (!value) {
+                    value = '<em>empty</em>';
+                }
+                // Handle boolean values
+                else if (value === 'true' || value === 'false') {
+                    value = `<code>${value}</code>`;
+                }
+                // Handle quoted strings
+                else if ((value.startsWith('"') && value.endsWith('"')) || 
+                         (value.startsWith("'") && value.endsWith("'"))) {
+                    value = value.slice(1, -1);
+                }
+                // Handle other values
+                else {
+                    value = `<code>${value}</code>`;
+                }
+                
+                tableRows.push(`| ${key} | ${value} |`);
+            }
+        }
+    });
+    
+    if (tableRows.length > 0) {
+        return `| Key | Value |\n| --- | --- |\n${tableRows.join('\n')}\n\n`;
+    }
+    
+    return '';
+}
+
+/**
  * Processes YAML frontmatter to make it renderable
  */
 function processYamlFrontmatter(markdownText) {
@@ -302,10 +353,10 @@ function processYamlFrontmatter(markdownText) {
                     const frontmatter = lines.slice(1, i).join('\n');
                     const content = lines.slice(i + 1).join('\n');
                     
-                    // Convert frontmatter to a formatted code block
-                    const processedFrontmatter = `\`\`\`yaml\n${frontmatter}\n\`\`\`\n\n`;
+                    // Convert frontmatter to GitHub-style table
+                    const tableFrontmatter = yamlToTable(frontmatter);
                     
-                    return processedFrontmatter + content;
+                    return tableFrontmatter + content;
                 }
             }
             // If we found opening --- but no closing ---, treat the whole thing as content
@@ -332,10 +383,13 @@ async function loadNote() {
 
     console.log('Attempting to load note:', notePath);
     console.log('Current URL:', window.location.href);
-    console.log('Full fetch URL:', new URL(notePath, window.location.href).href);
+    
+    // Use GitHub raw content URL
+    const githubRawUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${notePath}`;
+    console.log('Full fetch URL:', githubRawUrl);
 
     try {
-        const response = await fetch(notePath);
+        const response = await fetch(githubRawUrl);
         console.log('Response status:', response.status, response.statusText);
         
         if (!response.ok) {
