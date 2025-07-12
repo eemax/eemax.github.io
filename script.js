@@ -71,7 +71,7 @@ function createFolderTreeItem(folderName, folderData, isLast = false, hasRootFil
     folderContainer.className = 'tree-item folder-item';
     if (depth > 0) {
         folderContainer.className += ' nested';
-        folderContainer.style.marginLeft = `${depth * 20}px`;
+        folderContainer.style.marginLeft = `${depth * 15}px`;
     }
     
     const folderHeader = document.createElement('div');
@@ -80,9 +80,9 @@ function createFolderTreeItem(folderName, folderData, isLast = false, hasRootFil
     // Use different tree characters based on whether there are root files
     let treeChar;
     if (hasRootFiles && depth === 0) {
-        treeChar = isLast ? '└── ' : '├── ';
+        treeChar = isLast ? '└─ ' : '├─ ';
     } else {
-        treeChar = isLast ? '└── ' : '├── ';
+        treeChar = isLast ? '└─ ' : '├─ ';
     }
     
     folderHeader.innerHTML = `
@@ -143,7 +143,7 @@ function createFileTreeItem(file, isLast = false, isIndented = false) {
     // Create tree character span
     const treeChar = document.createElement('span');
     treeChar.className = 'tree-char';
-    treeChar.textContent = isLast ? '└── ' : '├── ';
+    treeChar.textContent = isLast ? '└─ ' : '├─ ';
     
     // Create filename link
     const noteLink = document.createElement('a');
@@ -228,6 +228,14 @@ async function buildMenu() {
             const folderContainer = createFolderTreeItem(folderName, folders[folderName], isLastFolder, hasRootFiles);
             notesListEl.appendChild(folderContainer);
         });
+
+        // Add bottom spacer for mobile to ensure scrollable area
+        if (window.innerWidth <= 768) {
+            const spacer = document.createElement('div');
+            spacer.style.height = '400px';
+            spacer.style.width = '100%';
+            notesListEl.appendChild(spacer);
+        }
 
         // After building the menu, load the note specified in the URL (or the first one)
         loadNote();

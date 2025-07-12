@@ -144,7 +144,7 @@ body {
 }
 
 .indented {
-    margin-left: 20px;
+    margin-left: 15px;
 }
 
 /* Nested folders are handled by JavaScript margin-left styling */
@@ -244,7 +244,6 @@ body {
         z-index: 1000;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 360px; /* 3x extra padding for iOS Safari bottom bar */
     }
     
     #sidebar h1 {
@@ -424,11 +423,16 @@ body {
     margin-bottom: 16px;
     width: 100%;
     overflow: auto;
+    word-wrap: break-word;
+    table-layout: fixed;
 }
 
 #content table th, #content table td {
     padding: 6px 13px;
     border: 1px solid #d0d7de;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 0;
 }
 
 #content table th {
