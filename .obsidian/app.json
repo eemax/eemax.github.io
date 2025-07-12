@@ -1,4 +1,6 @@
 {
   "newFileLocation": "folder",
-  "newFileFolderPath": "notes"
+  "newFileFolderPath": "Random Access Memories",
+  "newLinkFormat": "absolute",
+  "useMarkdownLinks": true
 }

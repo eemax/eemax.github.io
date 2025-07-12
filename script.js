@@ -345,6 +345,14 @@ function yamlToTable(yamlText) {
 }
 
 /**
+ * Processes internal note links to use hash-based navigation
+ */
+function processInternalLinks(markdownText) {
+    // Convert internal note links from [text](path.md) to [text](#path.md)
+    return markdownText.replace(/\[([^\]]+)\]\(([^)]+\.md)\)/g, '[$1](#$2)');
+}
+
+/**
  * Processes YAML frontmatter to make it renderable
  */
 function processYamlFrontmatter(markdownText) {
@@ -404,7 +412,10 @@ async function loadNote() {
         const markdownText = await response.text();
         
         // Process YAML frontmatter to make it renderable
-        const processedMarkdown = processYamlFrontmatter(markdownText);
+        let processedMarkdown = processYamlFrontmatter(markdownText);
+        
+        // Process internal note links
+        processedMarkdown = processInternalLinks(processedMarkdown);
         
         try {
             contentEl.innerHTML = marked.parse(processedMarkdown);
