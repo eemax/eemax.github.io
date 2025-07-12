@@ -266,6 +266,13 @@ body {
         margin-top: 0;
         -webkit-overflow-scrolling: touch;
     }
+    
+    #content table {
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-top: -20px;
+        width: calc(100% + 40px);
+    }
 }
 
 /* GitHub-style Markdown content */
