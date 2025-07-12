@@ -244,6 +244,7 @@ body {
         z-index: 1000;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         -webkit-overflow-scrolling: touch;
+        padding-bottom: 360px; /* 3x extra padding for iOS Safari bottom bar */
     }
     
     #sidebar h1 {

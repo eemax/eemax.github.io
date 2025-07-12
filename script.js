@@ -491,7 +491,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const overlay = document.getElementById('mobile-overlay');
     
-    mobileToggle.addEventListener('click', toggleMobileMenu);
+    mobileToggle.addEventListener('click', () => {
+        toggleMobileMenu();
+        // Re-apply iOS scroll fix when opening mobile menu
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            setTimeout(() => {
+                document.getElementById('sidebar').style.webkitOverflowScrolling = 'touch';
+            }, 100);
+        }
+    });
     overlay.addEventListener('click', closeMobileMenu);
     
     // Close mobile menu when clicking on a file link
