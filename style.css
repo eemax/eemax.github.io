@@ -16,7 +16,9 @@ body {
     padding: 20px 10px;
     border-right: 1px solid #ddd;
     overflow-y: auto;
+    overflow-x: hidden;
     transition: transform 0.3s ease;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Mobile hamburger menu */
@@ -205,15 +207,18 @@ body {
     flex-grow: 1;
     padding: 20px 40px;
     overflow-y: auto;
+    overflow-x: hidden;
     line-height: 1.6;
     background-color: #fff;
     color: #333;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Mobile styles */
 @media (max-width: 768px) {
     body {
         flex-direction: column;
+        -webkit-overflow-scrolling: touch;
     }
     
     .mobile-menu-toggle {
@@ -235,6 +240,7 @@ body {
         transform: translateX(-100%);
         z-index: 1000;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        -webkit-overflow-scrolling: touch;
     }
     
     #sidebar h1 {
@@ -254,6 +260,7 @@ body {
         margin-left: 0;
         padding: 80px 20px 20px 20px;
         margin-top: 0;
+        -webkit-overflow-scrolling: touch;
     }
 }
 
