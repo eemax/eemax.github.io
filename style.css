@@ -16,6 +16,60 @@ body {
     padding: 20px;
     border-right: 1px solid #ddd;
     overflow-y: auto;
+    transition: transform 0.3s ease;
+}
+
+/* Mobile hamburger menu */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    margin-right: 15px;
+}
+
+.mobile-menu-toggle:hover {
+    background-color: #f5f5f5;
+}
+
+/* Mobile header with title */
+.mobile-header {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 998;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.mobile-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+    text-align: center;
+}
+
+/* Mobile overlay */
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 #sidebar h1 {
@@ -32,6 +86,17 @@ body {
     font-size: 1rem;
     margin-bottom: 5px;
     color: #333;
+}
+
+.repo-link {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.1s ease;
+}
+
+.repo-link:hover {
+    color: #0969da;
+    text-decoration: none;
 }
 
 .tree-item {
@@ -136,6 +201,53 @@ body {
     line-height: 1.6;
     background-color: #fff;
     color: #333;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .mobile-header {
+        display: flex;
+    }
+    
+    #sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 280px;
+        min-width: 280px;
+        max-width: 280px;
+        transform: translateX(-100%);
+        z-index: 1000;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    #sidebar h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    #sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .mobile-overlay.open {
+        display: block;
+    }
+    
+    #content {
+        margin-left: 0;
+        padding: 80px 20px 20px 20px;
+        margin-top: 0;
+    }
 }
 
 /* GitHub-style Markdown content */

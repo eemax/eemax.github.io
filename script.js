@@ -205,7 +205,13 @@ async function buildMenu() {
         // Add repository name as root
         const repoHeader = document.createElement('div');
         repoHeader.className = 'repo-header';
-        repoHeader.textContent = `${repoName}/`;
+        
+        const repoLink = document.createElement('a');
+        repoLink.href = 'https://eemax.github.io/';
+        repoLink.textContent = `${repoName}/`;
+        repoLink.className = 'repo-link';
+        
+        repoHeader.appendChild(repoLink);
         notesListEl.appendChild(repoHeader);
 
         // Add root files first
@@ -409,11 +415,46 @@ async function loadNote() {
             contentEl.innerHTML = `<pre>${processedMarkdown}</pre>`;
         }
         
+        // Update mobile title with note name
+        updateMobileTitle(notePath);
+        
         // Add copy buttons to code blocks after rendering
         addCopyButtonsToCodeBlocks();
     } catch (error) {
         console.error('Error loading note:', error);
         contentEl.innerHTML = `<p style="color:red;">Error: Could not load note. ${error.message}</p>`;
+    }
+}
+
+// --- Mobile Menu Functions ---
+
+function toggleMobileMenu() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('mobile-overlay');
+    
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+}
+
+function closeMobileMenu() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('mobile-overlay');
+    
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+}
+
+function updateMobileTitle(notePath) {
+    const mobileTitle = document.getElementById('mobile-title');
+    if (mobileTitle) {
+        if (notePath) {
+            // Extract filename from path, remove .md extension, and decode URL encoding
+            const fileName = notePath.split('/').pop().replace('.md', '');
+            const decodedFileName = decodeURIComponent(fileName);
+            mobileTitle.textContent = decodedFileName;
+        } else {
+            mobileTitle.textContent = 'Notes';
+        }
     }
 }
 
@@ -423,4 +464,20 @@ async function loadNote() {
 window.addEventListener('hashchange', loadNote);
 
 // Build the menu and load the initial note when the page first loads
-document.addEventListener('DOMContentLoaded', buildMenu);
+document.addEventListener('DOMContentLoaded', () => {
+    buildMenu();
+    
+    // Mobile menu event listeners
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const overlay = document.getElementById('mobile-overlay');
+    
+    mobileToggle.addEventListener('click', toggleMobileMenu);
+    overlay.addEventListener('click', closeMobileMenu);
+    
+    // Close mobile menu when clicking on a file link
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('file-link')) {
+            closeMobileMenu();
+        }
+    });
+});
