@@ -232,7 +232,7 @@ async function buildMenu() {
         // Add bottom spacer for mobile to ensure scrollable area
         if (window.innerWidth <= 768) {
             const spacer = document.createElement('div');
-            spacer.style.height = '400px';
+            spacer.style.height = '200px';
             spacer.style.width = '100%';
             notesListEl.appendChild(spacer);
         }
