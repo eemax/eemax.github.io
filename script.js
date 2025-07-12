@@ -229,8 +229,8 @@ async function buildMenu() {
             notesListEl.appendChild(folderContainer);
         });
 
-        // Add bottom spacer for mobile to ensure scrollable area
-        if (window.innerWidth <= 768) {
+        // Add bottom spacer for mobile and iPad to ensure scrollable area
+        if (window.innerWidth <= 768 || /iPad|iPhone|iPod/.test(navigator.userAgent)) {
             const spacer = document.createElement('div');
             spacer.style.height = '200px';
             spacer.style.width = '100%';
