@@ -291,24 +291,30 @@ function addCopyButtonsToCodeBlocks() {
  * Processes YAML frontmatter to make it renderable
  */
 function processYamlFrontmatter(markdownText) {
-    // Check if the content starts with YAML frontmatter (--- on first line)
-    const lines = markdownText.split('\n');
-    if (lines[0].trim() === '---') {
-        // Find the closing ---
-        for (let i = 1; i < lines.length; i++) {
-            if (lines[i].trim() === '---') {
-                // Extract frontmatter and content
-                const frontmatter = lines.slice(1, i).join('\n');
-                const content = lines.slice(i + 1).join('\n');
-                
-                // Convert frontmatter to a formatted code block
-                const processedFrontmatter = `\`\`\`yaml\n${frontmatter}\n\`\`\`\n\n`;
-                
-                return processedFrontmatter + content;
+    try {
+        // Check if the content starts with YAML frontmatter (--- on first line)
+        const lines = markdownText.split('\n');
+        if (lines.length > 0 && lines[0].trim() === '---') {
+            // Find the closing ---
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim() === '---') {
+                    // Extract frontmatter and content
+                    const frontmatter = lines.slice(1, i).join('\n');
+                    const content = lines.slice(i + 1).join('\n');
+                    
+                    // Convert frontmatter to a formatted code block
+                    const processedFrontmatter = `\`\`\`yaml\n${frontmatter}\n\`\`\`\n\n`;
+                    
+                    return processedFrontmatter + content;
+                }
             }
+            // If we found opening --- but no closing ---, treat the whole thing as content
+            console.warn('YAML frontmatter not properly closed, treating as regular content');
         }
+    } catch (error) {
+        console.error('Error processing YAML frontmatter:', error);
     }
-    // If no frontmatter found, return original content
+    // If no frontmatter found or error occurred, return original content
     return markdownText;
 }
 
@@ -334,12 +340,20 @@ async function loadNote() {
         // Process YAML frontmatter to make it renderable
         const processedMarkdown = processYamlFrontmatter(markdownText);
         
-        contentEl.innerHTML = marked.parse(processedMarkdown);
+        try {
+            contentEl.innerHTML = marked.parse(processedMarkdown);
+        } catch (parseError) {
+            console.error('Markdown parsing error:', parseError);
+            console.error('Processed markdown:', processedMarkdown);
+            // Fallback to raw text if parsing fails
+            contentEl.innerHTML = `<pre>${processedMarkdown}</pre>`;
+        }
         
         // Add copy buttons to code blocks after rendering
         addCopyButtonsToCodeBlocks();
     } catch (error) {
-        contentEl.innerHTML = `<p style="color:red;">Error: Could not load note.</p>`;
+        console.error('Error loading note:', error);
+        contentEl.innerHTML = `<p style="color:red;">Error: Could not load note. ${error.message}</p>`;
     }
 }
 
