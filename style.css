@@ -219,6 +219,8 @@ body {
     body {
         flex-direction: column;
         -webkit-overflow-scrolling: touch;
+        height: 100vh;
+        height: 100dvh; /* Dynamic viewport height for iOS */
     }
     
     .mobile-menu-toggle {
@@ -234,6 +236,7 @@ body {
         top: 0;
         left: 0;
         height: 100vh;
+        height: 100dvh; /* Dynamic viewport height for iOS */
         width: 280px;
         min-width: 280px;
         max-width: 280px;
@@ -259,6 +262,7 @@ body {
     #content {
         margin-left: 0;
         padding: 80px 20px 20px 20px;
+        padding-bottom: 120px; /* Extra padding for iOS Safari bottom bar */
         margin-top: 0;
         -webkit-overflow-scrolling: touch;
     }
