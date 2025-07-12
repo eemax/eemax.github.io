@@ -330,10 +330,16 @@ async function loadNote() {
         return;
     }
 
+    console.log('Attempting to load note:', notePath);
+    console.log('Current URL:', window.location.href);
+    console.log('Full fetch URL:', new URL(notePath, window.location.href).href);
+
     try {
         const response = await fetch(notePath);
+        console.log('Response status:', response.status, response.statusText);
+        
         if (!response.ok) {
-            throw new Error("Note not found.");
+            throw new Error(`Note not found. Status: ${response.status} ${response.statusText}`);
         }
         const markdownText = await response.text();
         
