@@ -38,14 +38,23 @@ function groupFilesByFolder(files) {
 /**
  * Creates a folder tree item with expand/collapse functionality
  */
-function createFolderTreeItem(folderName, files, isLast = false) {
+function createFolderTreeItem(folderName, files, isLast = false, hasRootFiles = false) {
     const folderContainer = document.createElement('div');
     folderContainer.className = 'tree-item folder-item';
     
     const folderHeader = document.createElement('div');
     folderHeader.className = 'tree-header';
+    
+    // Use different tree characters based on whether there are root files
+    let treeChar;
+    if (hasRootFiles) {
+        treeChar = isLast ? '└── ' : '├── ';
+    } else {
+        treeChar = isLast ? '└── ' : '├── ';
+    }
+    
     folderHeader.innerHTML = `
-        <span class="tree-toggle">${isLast ? '└── ' : '├── '}</span>
+        <span class="tree-toggle">${treeChar}</span>
         <span class="folder-name">${folderName}/</span>
     `;
     
@@ -53,11 +62,11 @@ function createFolderTreeItem(folderName, files, isLast = false) {
     folderContent.className = 'tree-content';
     folderContent.style.display = 'none'; // Start closed
     
-    // Add files to folder content
+    // Add files to folder content with proper indentation
     const sortedFiles = files.sort((a, b) => a.path.localeCompare(b.path));
     sortedFiles.forEach((file, index) => {
         const isLastFile = index === sortedFiles.length - 1;
-        const fileItem = createFileTreeItem(file, isLastFile);
+        const fileItem = createFileTreeItem(file, isLastFile, true); // Indent files inside folders
         folderContent.appendChild(fileItem);
     });
     
@@ -66,8 +75,7 @@ function createFolderTreeItem(folderName, files, isLast = false) {
         const isExpanded = folderContent.style.display !== 'none';
         folderContent.style.display = isExpanded ? 'none' : 'block';
         folderHeader.querySelector('.tree-toggle').textContent = isExpanded ? 
-            (isLast ? '└── ' : '├── ') : 
-            (isLast ? '└── ' : '├── ');
+            treeChar : treeChar;
     });
     
     folderContainer.appendChild(folderHeader);
@@ -79,15 +87,25 @@ function createFolderTreeItem(folderName, files, isLast = false) {
 /**
  * Creates a file tree item
  */
-function createFileTreeItem(file, isLast = false) {
+function createFileTreeItem(file, isLast = false, isIndented = false) {
     const fileContainer = document.createElement('div');
     fileContainer.className = 'tree-item file-item';
+    if (isIndented) {
+        fileContainer.className += ' indented';
+    }
     
+    // Create tree character span
+    const treeChar = document.createElement('span');
+    treeChar.className = 'tree-char';
+    treeChar.textContent = isLast ? '└── ' : '├── ';
+    
+    // Create filename link
     const noteLink = document.createElement('a');
     noteLink.href = `#${file.path}`;
-    noteLink.textContent = `${isLast ? '└── ' : '├── '}${file.path.split('/').pop().replace('.md', '')}`;
+    noteLink.textContent = file.path.split('/').pop().replace('.md', '');
     noteLink.className = 'file-link';
     
+    fileContainer.appendChild(treeChar);
     fileContainer.appendChild(noteLink);
     return fileContainer;
 }
@@ -143,19 +161,20 @@ async function buildMenu() {
         repoHeader.textContent = `${repoName}/`;
         notesListEl.appendChild(repoHeader);
 
-        // Add folders first (sorted alphabetically)
-        const folderNames = Object.keys(folders).sort();
-        folderNames.forEach((folderName, index) => {
-            const isLastFolder = index === folderNames.length - 1 && rootFiles.length === 0;
-            const folderContainer = createFolderTreeItem(folderName, folders[folderName], isLastFolder);
-            notesListEl.appendChild(folderContainer);
-        });
-
-        // Add root files
+        // Add root files first
         if (rootFiles.length > 0) {
             const rootSection = createRootFilesSection(rootFiles);
             notesListEl.appendChild(rootSection);
         }
+
+        // Add folders after root files (sorted alphabetically)
+        const folderNames = Object.keys(folders).sort();
+        folderNames.forEach((folderName, index) => {
+            const isLastFolder = index === folderNames.length - 1;
+            const hasRootFiles = rootFiles.length > 0;
+            const folderContainer = createFolderTreeItem(folderName, folders[folderName], isLastFolder, hasRootFiles);
+            notesListEl.appendChild(folderContainer);
+        });
 
         // After building the menu, load the note specified in the URL (or the first one)
         loadNote();
