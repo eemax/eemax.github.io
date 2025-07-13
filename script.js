@@ -230,7 +230,8 @@ async function buildMenu() {
         });
 
         // Add bottom spacer for mobile to ensure scrollable area
-        if (window.innerWidth <= 768) {
+        // Add spacer for devices under 1024px or for iPhone/iPad user agents
+        if (window.innerWidth <= 1024 || /iPad|iPhone|iPod/.test(navigator.userAgent)) {
             const spacer = document.createElement('div');
             spacer.style.height = '200px';
             spacer.style.width = '100%';
