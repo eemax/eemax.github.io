@@ -1,4 +1,4 @@
-<- [[Random Access Memories/Inbox/Text Storage/Notes directory]]
+<- [[Organized Text/Text Storage/Notes directory]]
 # Showing up
 
 Most people dramatically overestimate what they can achieve in a day and underestimate what they can achieve in a year. This is where the quiet power of simply showing up daily reveals itself.
