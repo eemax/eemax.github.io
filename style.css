@@ -206,6 +206,7 @@ body {
 #content {
     flex-grow: 1;
     padding: 20px 40px;
+    padding-bottom: 80px !important; /* Always 80px bottom padding on all devices */
     overflow-y: auto;
     overflow-x: hidden;
     line-height: 1.6;
@@ -262,7 +263,7 @@ body {
     #content {
         margin-left: 0;
         padding: 80px 20px 20px 20px;
-        padding-bottom: 80px; /* Extra padding for iOS Safari bottom bar */
+        padding-bottom: 80px !important; /* Always 80px bottom padding on all devices */
         margin-top: 0;
         -webkit-overflow-scrolling: touch;
     }
@@ -285,7 +286,7 @@ body {
     
     #content {
         padding: 80px 30px 30px 30px;
-        padding-bottom: 100px; /* Adjusted for iPad */
+        padding-bottom: 80px !important; /* Always 80px bottom padding on all devices */
     }
 }
 
@@ -333,7 +334,7 @@ body {
     #content {
         margin-left: 0;
         padding: 80px 40px 40px 40px;
-        padding-bottom: 100px;
+        padding-bottom: 80px !important; /* Always 80px bottom padding on all devices */
         margin-top: 0;
         -webkit-overflow-scrolling: touch;
     }
@@ -359,7 +360,7 @@ body {
     
     #content {
         padding: 30px 40px;
-        padding-bottom: 60px;
+        padding-bottom: 80px !important; /* Always 80px bottom padding on all devices */
         -webkit-overflow-scrolling: touch;
     }
 }

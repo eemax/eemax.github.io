@@ -229,14 +229,11 @@ async function buildMenu() {
             notesListEl.appendChild(folderContainer);
         });
 
-        // Add bottom spacer for mobile to ensure scrollable area
-        // Add spacer for devices under 1024px or for iPhone/iPad user agents
-        if (window.innerWidth <= 1024 || /iPad|iPhone|iPod/.test(navigator.userAgent)) {
-            const spacer = document.createElement('div');
-            spacer.style.height = '200px';
-            spacer.style.width = '100%';
-            notesListEl.appendChild(spacer);
-        }
+        // Add bottom spacer to ensure scrollable area on all devices
+        const spacer = document.createElement('div');
+        spacer.style.height = '200px';
+        spacer.style.width = '100%';
+        notesListEl.appendChild(spacer);
 
         // After building the menu, load the note specified in the URL (or the first one)
         loadNote();
