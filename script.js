@@ -231,7 +231,7 @@ async function buildMenu() {
 
         // Add bottom spacer to ensure scrollable area on all devices
         const spacer = document.createElement('div');
-        spacer.style.height = '200px';
+        spacer.style.height = '100px';
         spacer.style.width = '100%';
         notesListEl.appendChild(spacer);
 
