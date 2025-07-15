@@ -8,6 +8,7 @@ This is my personal knowledge base and note-taking space. Here you'll find vario
 - **Organized Text/** - Structured notes and archived content
 - **Pinned/** - Important and frequently referenced notes
 - **Web Clipper/** - Saved web content and resources
+[Terminal](https://eemax.github.io/terminal.html)
 
 ## About
 
