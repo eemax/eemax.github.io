@@ -6,6 +6,7 @@ const repoName = 'eemax.github.io';
 // --- Global Variables ---
 const contentEl = document.getElementById('content');
 const notesListEl = document.getElementById('notes-list');
+const repoHeaderEl = document.getElementById('repo-header');
 
 // --- Main Functions ---
 
@@ -199,24 +200,28 @@ async function buildMenu() {
         // Group files by folder
         const { folders, rootFiles } = groupFilesByFolder(markdownFiles);
 
+        // Filter out home.md from root files since it's the default page
+        const filteredRootFiles = rootFiles.filter(file => file.path !== 'home.md');
+
         // Clear the notes list
         notesListEl.innerHTML = '';
 
-        // Add repository name as root
-        const repoHeader = document.createElement('div');
+        // Add repository name as header (replacing the old h1)
+        const repoHeader = document.createElement('h1');
         repoHeader.className = 'repo-header';
+        repoHeader.style.marginBottom = '0px'; // Reduce spacing
         
         const repoLink = document.createElement('a');
-        repoLink.href = 'https://eemax.github.io/';
+        repoLink.href = '#home.md';
         repoLink.textContent = `${repoName}/`;
         repoLink.className = 'repo-link';
         
         repoHeader.appendChild(repoLink);
-        notesListEl.appendChild(repoHeader);
+        repoHeaderEl.appendChild(repoHeader);
 
-        // Add root files first
-        if (rootFiles.length > 0) {
-            const rootSection = createRootFilesSection(rootFiles);
+        // Add root files first (excluding home.md)
+        if (filteredRootFiles.length > 0) {
+            const rootSection = createRootFilesSection(filteredRootFiles);
             notesListEl.appendChild(rootSection);
         }
 
@@ -235,7 +240,7 @@ async function buildMenu() {
         spacer.style.width = '100%';
         notesListEl.appendChild(spacer);
 
-        // After building the menu, load the note specified in the URL (or the first one)
+        // After building the menu, load the note specified in the URL (or home.md)
         loadNote();
 
     } catch (error) {
@@ -393,12 +398,13 @@ function processYamlFrontmatter(markdownText) {
  * Fetches the content of a specific Markdown file and renders it.
  */
 async function loadNote() {
-    // Get the file path from the URL hash. If empty, do nothing until a link is clicked.
-    const notePath = window.location.hash.substring(1);
+    // Get the file path from the URL hash. If empty, default to home.md
+    let notePath = window.location.hash.substring(1);
     
     if (!notePath) {
-        contentEl.innerHTML = "<p>Select a note from the list to view it.</p>";
-        return;
+        notePath = 'home.md';
+        // Update the URL hash to reflect the default note
+        window.location.hash = `#${notePath}`;
     }
 
     console.log('Attempting to load note:', notePath);
