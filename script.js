@@ -1,7 +1,7 @@
 // --- Configuration ---
 // IMPORTANT: Replace these with your own GitHub username and repository name
 const repoOwner = 'eemax';
-const repoName = 'eemax.github.io';
+const repoName = 'public-md';
 
 // --- Global Variables ---
 const contentEl = document.getElementById('content');
