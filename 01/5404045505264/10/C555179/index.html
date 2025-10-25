@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="theme-color" content="#2C3E50">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="Product information for UM Hoodie Regular Fit<br>Grey Melange, 2XS">
+    <title>Product ID</title>
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../../../../../public/styles.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="../../../../../public/script-a.js"></script>
+    <script>
+        const iconPaths = [
+            '../../../../../public/supply_chain_1.png',
+            '../../../../../public/supply_chain_2.png', 
+            '../../../../../public/supply_chain_3.png',
+            '../../../../../public/supply_chain_4.png',
+            '../../../../../public/supply_chain_4bc.png',
+            '../../../../../public/supply_chain_3c.png',
+            '../../../../../public/supply_chain_4bc.png'
+        ];
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Product Section -->
+        <section class="product-section">
+            <div class="product-info">
+                <h1 class="product-title">UM Hoodie Regular Fit<br>Grey Melange, 2XS</h1>
+            </div>
+            <div class="product-image-container">
+                <img src="../../../../../public/3440010-120.jpg" alt="UM Hoodie Regular Fit<br>Grey Melange, 2XS" class="product-image">
+                                    <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
+                        <div style="text-align:left;width:100%;">
+                            <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">Our unisex hoodie is crafted from a blend of 74% organic cotton, 20% recycled polyester and 6% viscose, offering a soft, comfortable fit with a 350 gsm fabric weight. Featuring an adjustable drawstring hood, ribbed 2x1 cuffs and bottom hem. The hoodie is enzyme-washed for a smooth, worn-in feel.</p>
+                        </div>
+                    <div class="product-certifications inline-icons-row">
+                        <a href="../../../../../public/ceres-cert.pdf" target="_blank"><img src="../../../../../public/ocs-blended.png" alt="Product Certification 3"></a>
+                        <a href="../../../../../public/ceres-cert.pdf" target="_blank"><img src="../../../../../public/rcs-blended.png" alt="Product Certification 4"></a>
+                        <a href="https://www.oeko-tex.com/en/detail?number=M2AN111K8" target="_blank"><img src="../../../../../public/oekotex-hoodie.png" alt="Product Certification 1"></a>
+                        <a href="https://petaapprovedvegan.peta.org/search-peta-approved-vegan/?_search=Texet" target="_blank"><img src="../../../../../public/peta-vegan.png" alt="Product Certification 2"></a>
+                    </div>
+                    <div class="cert-link">
+                        <a href="../../../../../certifications.html" target="_blank">Click to read about all certifications</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Material -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="material-toggle">
+            <label for="material-toggle" class="section-header">
+                <span>Material</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="materials-scroll">
+                        <div class="material-card">
+                            <div class="desc-title">Main fabric</div>
+                            <div class="desc-text">74% OCS certified organic cotton<br>20% RCS certified recycled polyester<br>6% Viscose<br>Certified by CERES-1725<br>350 gsm</div>
+                        </div>
+                        <div class="material-card">
+                            <div class="desc-title">Hood lining</div>
+                            <div class="desc-text">90% OCS certified organic cotton<br>10% Viscose<br>Certified by CERES-1725<br>180 gsm<br><br></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Care Section -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="care-toggle">
+            <label for="care-toggle" class="section-header">
+                <span>Care</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-care-scroll">
+                        <div class="desc-care-card">
+                            <div class="desc-title">Care Instructions</div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;margin-top:0.1rem;">
+                                <img src="../../../../../public/care-icon60.png" alt="Care Instructions" style="max-height:32px;width:auto;display:block;">
+                                <div class="desc-text" style="text-align:left;">Machine Wash Max. 60°C<br>Do Not Bleach <br>Tumble Low Temp<br>Ironing Medium Temp<br>Do Not Dry Clean</div>
+                            </div>
+                        </div>
+                        <div class="desc-care-card">
+                            <div class="desc-title">Extended Care Instructions</div>
+                            <div class="desc-text" style="margin-top:0.1rem;">Stretch When Wet<br>Wash Inside Out<br>Wash With Similar Colors<br>Reshape While Damp<br>Wash Separately The First Time<br>Care Instructions Exclusive Of Decoration</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Care to Longevity -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="care-longevity-toggle">
+            <label for="care-longevity-toggle" class="section-header">
+                <span>Care to Longevity</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text">With the following tips for caring for your clothes, you can extend their life and minimize the environmental impact of the care process.<br>We consciously choose a timeless, neutral design. By taking into account the needs of the wearer and eco-design, in combination with quality materials, you can enjoy optimal longevity.<br><br><strong>- Wash efficiently:</strong> Use a full load and select a low-spin setting. Washing at lower temperatures conserves energy and is gentler on fabrics, preserving their quality.<br><strong>- Protect the fabric:</strong> Turn clothes inside out before washing. This shields the outer surface, reducing wear and maintaining their appearance.<br><strong>- Air dry for sustainability:</strong> Skip the dryer to save energy and minimize fabric damage. Air drying is a gentle, eco-friendly alternative that extends the life of your garments.<br><br>By adopting these practices, you can keep your clothes looking their best while supporting a more sustainable future.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supply Chain -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="supply-chain-toggle">
+            <label for="supply-chain-toggle" class="section-header">
+                <span>Supply Chain</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="supply-chain-section">
+                        <div class="map-container" id="map">
+                            <div class="map-overlay" id="mapOverlay"></div>
+                        </div>
+                        <div class="supply-chain-steps-vertical">
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="../../../../../public/supply_chain_1.png" alt="Garment Production">
+                                    <span>Garment<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Lariz Fashion Ltd.<br>Bandar, Bangladesh</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="../../../../../public/supply_chain_2.png" alt="Fabric Production">
+                                    <span>Fabric<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Fariha Knit Tex Ltd.<br>Narayanganj, Bangladesh</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="../../../../../public/supply_chain_3.png" alt="Yarn Production">
+                                    <span>Yarn<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Ludhiana<br>Punjab, India</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="../../../../../public/supply_chain_3c.png" alt="Yarn Production">
+                                    <span>Yarn<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Kaliakair<br>Gazipur, Bangladesh</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="../../../../../public/supply_chain_4.png" alt="Raw Material">
+                                    <span>Raw<br>Material</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Samana<br>Punjab, India</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="../../../../../public/supply_chain_4bc.png" alt="Raw Material">
+                                    <span>Raw<br>Material</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Wuxi<br>Jiangyin, China</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="../../../../../public/supply_chain_4bc.png" alt="Raw Material">
+                                    <span>Raw<br>Material</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Söke<br>Aydın, Turkey</div>
+                            </div>
+                        </div>
+                        <div class="certification-squares inline-icons-row" style="margin:0.5rem 0 0 0;justify-content:center;">
+                            <a href="../../../../../public/bsci-cert.pdf" target="_blank"><img src="../../../../../public/amfori-bsci.png" alt="Cert 1"></a>
+                            <a href="../../../../../public/iso9001-cert.pdf" target="_blank"><img src="../../../../../public/iso9001-2015.png" alt="Cert 2"></a>
+                            <a href="../../../../../public/step-cert.pdf" target="_blank"><img src="../../../../../public/oekotex-step.png" alt="Cert 3"></a>
+                        </div>
+                        <div style="text-align:center;">
+                            <small style="color:var(--text-secondary);font-size:0.75rem;">Certifications apply to the factory Lariz Fashion Ltd. only</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Details -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="product-details-toggle">
+            <label for="product-details-toggle" class="section-header">
+                <span>Product Details</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="materials-scroll">
+                        <div class="material-card">
+                            <div class="desc-title">Product Information</div>
+                            <div style="display:flex;flex-direction:column;gap:0.1rem;margin-top:0.1rem;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Product Code:</span>
+                                    <span class="detail-value" style="text-align:right;">3440010-120-2</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Available Sizes:</span>
+                                    <span class="detail-value" style="text-align:right;">2XS-5XL</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">HS/TARIC Code:</span>
+                                    <span class="detail-value" style="text-align:right;">6110209100</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">EAN Code:</span>
+                                    <span class="detail-value" style="text-align:right;">5404045505264</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Purchase Order:</span>
+                                    <span class="detail-value" style="text-align:right;">C555179</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="material-card">
+                            <div class="desc-title">Import Information</div>
+                            <div class="desc-text" style="margin-top:0.1rem;">Texet Benelux NV<br>Nieuwlandlaan 97<br>3200 Aarschot, Belgium<br>UM@texet.be</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life Cycle Assessment -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="lca-toggle">
+            <label for="lca-toggle" class="section-header">
+                <span>Life Cycle Assessment</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="supply-chain-steps-vertical">
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="../../../../../public/lca_carbon.png" alt="Carbon Emission">
+                                <span>Carbon<br>Emission</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">3.82 kg CO₂<br>emission per garment</div>
+                        </div>
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="../../../../../public/lca_water.png" alt="Water Use">
+                                <span>Water<br>Use</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">3340 liters<br>water per garment</div>
+                        </div>
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="../../../../../public/lca_energy.png" alt="Energy Consumption">
+                                <span>Energy<br>Consumption</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">12.41 kWh<br>energy per garment</div>
+                        </div>
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="../../../../../public/lca_bottles.png" alt="PET Bottles">
+                                <span>PET<br>Bottles</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">11 bottles<br>recycled per garment</div>
+                        </div>
+                    </div>
+                    <div class="cert-link">
+                        <a href="../../../../../lca.html" target="_blank">Click for more LCA information</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Repair -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="repair-toggle">
+            <label for="repair-toggle" class="section-header">
+                <span>Repair</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text"><strong>Designed for Repairability</strong><br>This garment is crafted with repairability at its core. Its modular components, standardized seams, and accessible fastenings make it easy to repair in case of wear or damage.<br><br><strong>Repair Options</strong><br>Users can perform basic fixes themselves using a standard repair kit.<br>Opt for certified local tailoring services for more complex repairs.<br><br><strong>Benefits of Repair</strong><br>Choosing repair over replacement extends the product’s lifecycle and maximizes your return on investment in workwear. By maintaining your garment, you contribute to sustainability and reduce waste.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- End of Life -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="end-of-life-toggle">
+            <label for="end-of-life-toggle" class="section-header">
+                <span>End of Life</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text">At the end of its useful life, this garment should be handled in accordance with your country’s waste management regulations. Always follow local guidelines for textile disposal or recycling. Where available, return the item to an authorized collection point or designated drop-off location for professional processing.<br><br>The product is designed to facilitate dismantling.<br><br>Ensure all parts are clean and dry before disposal or recycling.<br> supports circularity in the textile sector.<br><br>♻️ Labels & Hangtag Components<br>Inner Labels<br>All our inner labels are made from recycled polyester.<br><br>Hangtag Cord<br>The cord attached to the FSC-certified paper hangtag is made from 100% organic cotton.<br><br>➤ Recycling Advice<br>Both the recycled polyester labels and the organic cotton cord can be disposed of with textile waste, if accepted by your local waste management service.<br><br>📌 Note: The paper hangtag should be disposed of with paper recycling, not textile waste.<br><br>Thank you for recycling.<br>Proper end-of-life handling not only reduces environmental impact but also supports circularity in the textile sector. By recycling, you help give materials a second life and enable the reuse of valuable resources in the creation of new textiles — thank you for making a difference.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

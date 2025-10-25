@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="theme-color" content="#2C3E50">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="Product information for {{product_name}}">
+    <title>Product ID</title>
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../../../../../public/styles.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="../../../../../public/script-d.js"></script>
+    <script>
+        const iconPaths = [
+            '{{supply_chain_1}}',
+            '{{supply_chain_2}}', 
+            '{{supply_chain_3}}',
+            '{{supply_chain_4}}',
+            '{{supply_chain_4b}}'
+        ];
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Product Section -->
+        <section class="product-section">
+            <div class="product-info">
+                <h1 class="product-title">{{product_name}}</h1>
+            </div>
+            <div class="product-image-container">
+                <img src="{{product_image}}" alt="{{product_name}}" class="product-image">
+                                    <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
+                        <div style="text-align:left;width:100%;">
+                            <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">{{product_description}}</p>
+                        </div>
+                    <div class="product-certifications inline-icons-row">
+                        <a href="{{product_cert_3_url}}" target="_blank"><img src="{{product_cert_3}}" alt="Product Certification 3"></a>
+                        <a href="{{product_cert_4_url}}" target="_blank"><img src="{{product_cert_4}}" alt="Product Certification 4"></a>
+                        <a href="{{product_cert_1_url}}" target="_blank"><img src="{{product_cert_1}}" alt="Product Certification 1"></a>
+                        <a href="{{product_cert_2_url}}" target="_blank"><img src="{{product_cert_2}}" alt="Product Certification 2"></a>
+                    </div>
+                    <div class="cert-link">
+                        <a href="../../../../../certifications.html" target="_blank">Click to read about all certifications</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Material -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="material-toggle">
+            <label for="material-toggle" class="section-header">
+                <span>Material</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="materials-scroll">
+                        <div class="material-card">
+                            <div class="desc-title">Main fabric</div>
+                            <div class="desc-text">{{material1_composition}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Care Section -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="care-toggle">
+            <label for="care-toggle" class="section-header">
+                <span>Care</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-care-scroll">
+                        <div class="desc-care-card">
+                            <div class="desc-title">Care Instructions</div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;margin-top:0.1rem;">
+                                <img src="{{care_icon}}" alt="Care Instructions" style="max-height:32px;width:auto;display:block;">
+                                <div class="desc-text" style="text-align:left;">{{care_instructions}}</div>
+                            </div>
+                        </div>
+                        <div class="desc-care-card">
+                            <div class="desc-title">Extended Care Instructions</div>
+                            <div class="desc-text" style="margin-top:0.1rem;">{{care_instructions_extended}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Care to Longevity -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="care-longevity-toggle">
+            <label for="care-longevity-toggle" class="section-header">
+                <span>Care to Longevity</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text">{{care_longevity}}</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supply Chain -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="supply-chain-toggle">
+            <label for="supply-chain-toggle" class="section-header">
+                <span>Supply Chain</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="supply-chain-section">
+                        <div class="map-container" id="map">
+                            <div class="map-overlay" id="mapOverlay"></div>
+                        </div>
+                        <div class="supply-chain-steps-vertical">
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="{{supply_chain_1}}" alt="Garment Production">
+                                    <span>Garment<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">{{product_factory}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="{{supply_chain_2}}" alt="Fabric Production">
+                                    <span>Fabric<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">{{material1_fabric_tier2}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="{{supply_chain_3}}" alt="Yarn Production">
+                                    <span>Yarn<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">{{material1_yarn_tier3}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="{{supply_chain_4}}" alt="Raw Material">
+                                    <span>Raw<br>Material</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">{{material1_raw_tier4}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="{{supply_chain_4b}}" alt="Raw Material">
+                                    <span>Raw<br>Material</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">{{material1_raw2_tier4b}}</div>
+                            </div>
+                        </div>
+                        <div class="certification-squares inline-icons-row" style="margin:0.5rem 0 0 0;justify-content:center;">
+                            <a href="{{supply_chain_cert_1_url}}" target="_blank"><img src="{{supply_chain_cert_1}}" alt="Cert 1"></a>
+                            <a href="{{supply_chain_cert_2_url}}" target="_blank"><img src="{{supply_chain_cert_2}}" alt="Cert 2"></a>
+                            <a href="{{supply_chain_cert_3_url}}" target="_blank"><img src="{{supply_chain_cert_3}}" alt="Cert 3"></a>
+                        </div>
+                        <div style="text-align:center;">
+                            <small style="color:var(--text-secondary);font-size:0.75rem;">Certifications apply to the factory Lariz Fashion Ltd. only</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Details -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="product-details-toggle">
+            <label for="product-details-toggle" class="section-header">
+                <span>Product Details</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="materials-scroll">
+                        <div class="material-card">
+                            <div class="desc-title">Product Information</div>
+                            <div style="display:flex;flex-direction:column;gap:0.1rem;margin-top:0.1rem;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Product Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Available Sizes:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_sizes}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">HS/TARIC Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_taric_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">EAN Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{ean_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Purchase Order:</span>
+                                    <span class="detail-value" style="text-align:right;">{{purchase_order}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="material-card">
+                            <div class="desc-title">Import Information</div>
+                            <div class="desc-text" style="margin-top:0.1rem;">{{importer}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life Cycle Assessment -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="lca-toggle">
+            <label for="lca-toggle" class="section-header">
+                <span>Life Cycle Assessment</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="supply-chain-steps-vertical">
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="{{lca_carbon_icon}}" alt="Carbon Emission">
+                                <span>Carbon<br>Emission</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">{{lca_carbon}}</div>
+                        </div>
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="{{lca_water_icon}}" alt="Water Use">
+                                <span>Water<br>Use</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">{{lca_water}}</div>
+                        </div>
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="{{lca_energy_icon}}" alt="Energy Consumption">
+                                <span>Energy<br>Consumption</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">{{lca_energy}}</div>
+                        </div>
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="{{lca_bottles_icon}}" alt="PET Bottles">
+                                <span>PET<br>Bottles</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">{{lca_bottles}}</div>
+                        </div>
+                    </div>
+                    <div class="cert-link">
+                        <a href="../../../../../lca.html" target="_blank">Click for more LCA information</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Repair -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="repair-toggle">
+            <label for="repair-toggle" class="section-header">
+                <span>Repair</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text">{{repairability}}</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- End of Life -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="end-of-life-toggle">
+            <label for="end-of-life-toggle" class="section-header">
+                <span>End of Life</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text">{{end_of_life}}</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

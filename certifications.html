@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product, Material, and Company Certifications">
+    <title>Certifications</title>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #34495E;
+            --accent: #E67E22;
+            --bg-color: #fff;
+            --text-primary: #2C3E50;
+            --text-secondary: #7F8C8D;
+            --border-color: #ECF0F1;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 2px 4px rgba(0,0,0,0.05);
+            --radius: 0.5rem;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+        .container {
+            width: 100vw;
+            max-width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+        @media (min-width: 768px) {
+            .container {
+                max-width: 48rem;
+                margin: 0 auto;
+                padding: 1rem;
+            }
+        }
+        @media (min-width: 900px) {
+            .container {
+                max-width: 64rem;
+            }
+        }
+        .header {
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .certification-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .certification-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .certification-icon {
+            max-width: 120px;
+            height: 64px;
+            margin: 0 auto 0.5rem;
+            display: block;
+            object-fit: contain;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .certification-icon:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+        .certification-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .certification-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        .view-cert-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .view-cert-btn:hover {
+            background: var(--secondary);
+        }
+        .back-link {
+            display: inline-block;
+            margin: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            transition: background-color 0.2s ease;
+        }
+        .back-link:hover {
+            background: var(--border-color);
+        }
+        @media (max-width: 768px) {
+            .certifications-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            .certification-card {
+                padding: 1rem;
+            }
+            .certification-title {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <p>This page provides additional information about the various certifications of the Untagged Movement brand.</p>
+        </div>
+        <div class="certifications-grid">
+            <h2 style="grid-column: 1 / -1; text-align: center; margin-bottom: 1rem; color: var(--text-primary); font-size: 1.3rem;">Product & Material Certifications</h2>
+            <div class="certification-card">
+                <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 0.5rem;">
+                    <a href="public/ceres-cert.pdf" target="_blank"><img src="public/ocs-100.png" alt="OCS 100" class="certification-icon"></a>
+                    <a href="public/ceres-cert.pdf" target="_blank"><img src="public/ocs-blended.png" alt="OCS Blended" class="certification-icon"></a>
+                </div>
+                <h3 class="certification-title">Organic Content Standard</h3>
+                <p class="certification-description">Verifies and tracks organic materials from certified farms through the full supply chain. Applies to non-food products with at least 5% certified organic content: OCS 100 (≥95%) and OCS Blended (5–94%). Focuses solely on verifying organic material content and chain of custody, without assessing quality, safety, environmental, or social performance.</p>
+            </div>
+            <div class="certification-card">
+                <a href="public/ceres-cert.pdf" target="_blank"><img src="public/rcs-blended.png" alt="Recycled Content Standard" class="certification-icon"></a>
+                <h3 class="certification-title">Recycled Content Standard</h3>
+                <p class="certification-description">Confirms products contain defined percentages of recycled materials from pre- and post-consumer sources, requiring at least 5% recycled content. Certification assesses manufacturing data, chain-of-custody procedures, and mass-balance calculations. Applicable to textiles, building materials, packaging, and electronics.</p>
+            </div>
+            <div class="certification-card">
+                <a href="https://www.oeko-tex.com/en/our-standards/oeko-tex-made-in-green" target="_blank"><img src="public/made-in-green.png" alt="Oekotex Made in Green" class="certification-icon"></a>
+                <h3 class="certification-title">OEKO-TEX® MADE IN GREEN</h3>
+                <p class="certification-description">A traceable label for textiles and leather tested for harmful substances, produced sustainably, and under safe, socially responsible conditions. Requires OEKO-TEX® STANDARD 100 or LEATHER STANDARD certification, STeP-certified production facilities, and full supply chain traceability via a unique ID or QR code.</p>
+            </div>
+            <div class="certification-card">
+                <a href="public/oekotex100-cert.pdf" target="_blank"><img src="public/oekotex-100.png" alt="Oekotex 100" class="certification-icon"></a>
+                <h3 class="certification-title">OEKO-TEX® STANDARD 100</h3>
+                <p class="certification-description">Tests and certifies textiles for over 1,000 harmful substances with limits stricter than legal standards. Applies to all production stages and components, and is organized into four product classes based on skin contact.</p>
+            </div>
+            <div class="certification-card">
+                <a href="https://petaapprovedvegan.peta.org/search-peta-approved-vegan/?_search=Texet" target="_blank"><img src="public/peta-vegan.png" alt="PETA-Approved Vegan" class="certification-icon"></a>
+                <h3 class="certification-title">PETA-Approved Vegan</h3>
+                <p class="certification-description">Verifies products contain no animal-derived ingredients and were not tested on animals. Certification is based on company self-reporting and supplier declarations rather than third-party audits. Applies to fashion, cosmetics, food, and household goods, with annual certification renewal required.</p>
+            </div>
+            <h2 style="grid-column: 1 / -1; text-align: center; margin: 2rem 0 1rem 0; color: var(--text-primary); font-size: 1.3rem;">Company Certifications</h2>
+            <div class="certification-card">
+                <a href="public/bsci-cert.pdf" target="_blank"><img src="public/amfori-bsci.png" alt="BSCI" class="certification-icon"></a>
+                <h3 class="certification-title">amfori BSCI</h3>
+                <p class="certification-description">A global audit program improving labor and social conditions across supply chains. Assesses 13 Performance Areas based on ILO conventions, including fair pay, working hours, health and safety, and environmental protection. Facilities are audited every two years and rated from A to E.</p>
+            </div>
+            <div class="certification-card">
+                <a href="public/iso9001-cert.pdf" target="_blank"><img src="public/iso9001-2015.png" alt="ISO9001:2015" class="certification-icon"></a>
+                <h3 class="certification-title">ISO 9001</h3>
+                <p class="certification-description">Specifies requirements for a quality management system ensuring consistent product and service quality. Built on seven principles including customer focus, leadership, and continuous improvement. Organizations must document processes, assign responsibilities, and perform regular internal audits and management reviews.</p>
+            </div>
+            <div class="certification-card">
+                <a href="public/step-cert.pdf" target="_blank"><img src="public/oekotex-step.png" alt="Oekotex STeP" class="certification-icon"></a>
+                <h3 class="certification-title">OEKO-TEX® STeP</h3>
+                <p class="certification-description">Certifies textile and leather production facilities for sustainable, socially responsible manufacturing. Evaluates six areas: chemical management, environmental performance, environmental management, social responsibility, health and safety, and quality management. Combines self-assessment with independent audits, scoring facilities on a three-tier scale. Recognized by and compatible with other certifications like BSCI, SA8000, ISO 14001, and ISO 9001.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
