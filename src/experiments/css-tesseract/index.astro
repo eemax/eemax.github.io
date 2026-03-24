@@ -1,0 +1,291 @@
+---
+interface Props {
+  preview?: boolean;
+}
+
+const { preview = false } = Astro.props;
+
+// A tesseract has 16 vertices and 32 edges
+// We'll create a simplified but visually striking version:
+// Two nested cubes with connecting edges, all in CSS 3D
+
+const innerSize = 60;
+const outerSize = 140;
+
+// Cube vertices (normalized -1 to 1)
+const cubeVerts = [
+  [-1, -1, -1], [-1, -1, 1], [-1, 1, -1], [-1, 1, 1],
+  [1, -1, -1], [1, -1, 1], [1, 1, -1], [1, 1, 1],
+];
+
+// Cube edges (pairs of vertex indices)
+const cubeEdges = [
+  [0, 1], [0, 2], [0, 4], [1, 3], [1, 5], [2, 3],
+  [2, 6], [3, 7], [4, 5], [4, 6], [5, 7], [6, 7],
+];
+
+// Connecting edges between inner and outer cube (same index pairs)
+const connectEdges = [0, 1, 2, 3, 4, 5, 6, 7];
+---
+
+<div class={`tesseract-wrap ${preview ? 'preview' : ''}`}>
+  <div class="scene">
+    <div class="tesseract">
+      <div class="cube outer">
+        {cubeVerts.map((v, i) => (
+          <div
+            class="vertex"
+            style={`--vx: ${v[0] * outerSize}px; --vy: ${v[1] * outerSize}px; --vz: ${v[2] * outerSize}px;`}
+            data-idx={i}
+          />
+        ))}
+      </div>
+      <div class="cube inner">
+        {cubeVerts.map((v, i) => (
+          <div
+            class="vertex"
+            style={`--vx: ${v[0] * innerSize}px; --vy: ${v[1] * innerSize}px; --vz: ${v[2] * innerSize}px;`}
+            data-idx={`i${i}`}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @property --rx {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @property --ry {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @property --rz {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @property --rw {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .tesseract-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+
+  .scene {
+    perspective: 800px;
+    perspective-origin: 50% 50%;
+  }
+
+  .tesseract {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    animation:
+      spin-x 12s linear infinite,
+      spin-y 18s linear infinite,
+      spin-w 25s linear infinite;
+    --rx: 0deg;
+    --ry: 0deg;
+    --rz: 0deg;
+    --rw: 0deg;
+    transform: rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz));
+  }
+
+  .preview .tesseract {
+    width: 200px;
+    height: 200px;
+  }
+
+  @keyframes spin-x {
+    to { --rx: 360deg; }
+  }
+
+  @keyframes spin-y {
+    to { --ry: 360deg; }
+  }
+
+  @keyframes spin-w {
+    to { --rw: 360deg; }
+  }
+
+  .cube {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inner {
+    animation: inner-pulse 25s ease-in-out infinite;
+  }
+
+  @keyframes inner-pulse {
+    0%, 100% { transform: scale3d(1, 1, 1); }
+    25% { transform: scale3d(1.15, 0.9, 1.05); }
+    50% { transform: scale3d(0.9, 1.15, 0.95); }
+    75% { transform: scale3d(1.05, 1.05, 1.15); }
+  }
+
+  .vertex {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #ff003c;
+    border-radius: 0;
+    transform: translate3d(var(--vx), var(--vy), var(--vz));
+    box-shadow: 0 0 6px #ff003c88;
+  }
+
+  .inner .vertex {
+    background: #ff003c;
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 4px #ff003caa;
+  }
+
+  /* Edge lines rendered as thin pseudo-elements connecting vertices */
+  /* We use box-shadow tricks for the wireframe look */
+
+  .cube::before,
+  .cube::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+  }
+
+  /* Outer cube faces as wireframes */
+  .outer::before {
+    /* Front face */
+    border: 1px solid #ff003c33;
+    transform: translateZ(140px);
+    width: 280px;
+    height: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -140px;
+    margin-left: -140px;
+    mix-blend-mode: screen;
+  }
+
+  .outer::after {
+    /* Back face */
+    border: 1px solid #ff003c33;
+    transform: translateZ(-140px);
+    width: 280px;
+    height: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -140px;
+    margin-left: -140px;
+    mix-blend-mode: screen;
+  }
+
+  .inner::before {
+    /* Front face */
+    border: 1px solid #ff003c55;
+    transform: translateZ(60px);
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -60px;
+    margin-left: -60px;
+    mix-blend-mode: screen;
+  }
+
+  .inner::after {
+    /* Back face */
+    border: 1px solid #ff003c55;
+    transform: translateZ(-60px);
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -60px;
+    margin-left: -60px;
+    mix-blend-mode: screen;
+  }
+
+  /* Additional faces via box-shadows on the cubes */
+
+  .tesseract::before,
+  .tesseract::after {
+    content: '';
+    position: absolute;
+    transform-style: preserve-3d;
+  }
+
+  /* Glow effect */
+  .tesseract-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, #ff003c08 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Additional wireframe faces using generated elements */
+  .outer {
+    /* Left face */
+    outline: none;
+
+    & .vertex:nth-child(1)::after,
+    & .vertex:nth-child(2)::after,
+    & .vertex:nth-child(5)::after,
+    & .vertex:nth-child(6)::after {
+      content: '';
+      position: absolute;
+      width: 280px;
+      height: 1px;
+      background: linear-gradient(90deg, #ff003c22, #ff003c44, #ff003c22);
+      transform-origin: left center;
+    }
+
+    & .vertex:nth-child(1)::before,
+    & .vertex:nth-child(3)::before,
+    & .vertex:nth-child(5)::before,
+    & .vertex:nth-child(7)::before {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 280px;
+      background: linear-gradient(180deg, #ff003c22, #ff003c44, #ff003c22);
+      transform-origin: top center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tesseract {
+      animation: none;
+      transform: rotateX(25deg) rotateY(35deg);
+    }
+    .inner {
+      animation: none;
+    }
+  }
+</style>

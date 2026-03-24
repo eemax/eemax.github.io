@@ -1,0 +1,143 @@
+---
+import Base from '../../layouts/Base.astro';
+import { experiments, type ExperimentMeta } from '../../data/experiments';
+import ShaderNoiseField from '../../experiments/shader-noise-field/index.astro';
+import CssTesseract from '../../experiments/css-tesseract/index.astro';
+import FlowField from '../../experiments/flow-field/index.astro';
+
+export function getStaticPaths() {
+  return experiments
+    .filter((e) => e.enabled)
+    .map((e) => ({ params: { slug: e.slug }, props: { experiment: e } }));
+}
+
+interface Props {
+  experiment: ExperimentMeta;
+}
+
+const { experiment } = Astro.props;
+
+const componentMap: Record<string, any> = {
+  'shader-noise-field': ShaderNoiseField,
+  'css-tesseract': CssTesseract,
+  'flow-field': FlowField,
+};
+
+const Component = componentMap[experiment.slug];
+---
+
+<Base title={`${experiment.title} — EEMAX`}>
+  <div class="exp-page" transition:name={`exp-${experiment.slug}`}>
+    <div class="exp-container" id="exp-root">
+      <Component preview={false} />
+    </div>
+    <div class="exp-overlay" id="exp-overlay">
+      <div class="exp-overlay-top">
+        <span class="exp-title" style={`color: ${experiment.color}`}>{experiment.title}</span>
+        <a href="/" class="exp-back">[X] BACK</a>
+      </div>
+      <div class="exp-overlay-bottom">
+        <div class="exp-tags">
+          {experiment.tech.map((t) => (
+            <span class="exp-tag">{t}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const overlay = document.getElementById('exp-overlay');
+  let hideTimeout: ReturnType<typeof setTimeout>;
+
+  function showOverlay() {
+    overlay?.classList.remove('hidden');
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      overlay?.classList.add('hidden');
+    }, 3000);
+  }
+
+  document.addEventListener('mousemove', showOverlay);
+  document.addEventListener('touchstart', showOverlay);
+  showOverlay();
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      window.location.href = '/';
+    }
+  });
+</script>
+
+<style>
+  .exp-page {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+  }
+
+  .exp-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .exp-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    transition: opacity 0.4s;
+
+    &.hidden {
+      opacity: 0;
+    }
+  }
+
+  .exp-overlay-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .exp-title {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .exp-back {
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+    pointer-events: all;
+    cursor: crosshair;
+    letter-spacing: 0.1em;
+
+    &:hover {
+      color: var(--fg);
+      text-decoration: none;
+    }
+  }
+
+  .exp-overlay-bottom {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .exp-tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .exp-tag {
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+    border: 1px solid var(--border);
+    padding: 0.1rem 0.4rem;
+  }
+</style>

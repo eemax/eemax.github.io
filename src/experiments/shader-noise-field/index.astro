@@ -1,0 +1,40 @@
+---
+interface Props {
+  preview?: boolean;
+}
+
+const { preview = false } = Astro.props;
+---
+
+<div class="shader-noise-field" data-preview={preview.toString()}>
+  <canvas id="shader-canvas"></canvas>
+</div>
+
+<script>
+  import { ShaderNoiseField } from './ShaderNoiseField';
+
+  const container = document.querySelector('.shader-noise-field') as HTMLElement;
+  const canvas = document.getElementById('shader-canvas') as HTMLCanvasElement;
+  const isPreview = container.dataset.preview === 'true';
+
+  try {
+    const field = new ShaderNoiseField(canvas, isPreview);
+    field.start();
+  } catch (e) {
+    console.warn('WebGL2 not available:', e);
+  }
+</script>
+
+<style>
+  .shader-noise-field {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>

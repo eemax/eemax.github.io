@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+import { getActiveExperiments } from '../data/experiments';
+
+const experiments = getActiveExperiments();
+---
+
+<Base title="EEMAX — Playground">
+  <main class="grid-page">
+    <div class="grid">
+      {experiments.map((exp) => (
+        <a
+          href={`/exp/${exp.slug}/`}
+          class="card"
+          style={`--accent: ${exp.color}`}
+          transition:name={`exp-${exp.slug}`}
+        >
+          <div class="card-preview" id={`preview-${exp.slug}`} data-slug={exp.slug}>
+            <div class="card-preview-inner"></div>
+          </div>
+          <div class="card-info">
+            <h2 class="card-title">{exp.title}</h2>
+            <p class="card-desc">{exp.description}</p>
+            <div class="card-meta">
+              <span class="card-date">{exp.date}</span>
+              <div class="card-tags">
+                {exp.tech.map((t) => (
+                  <span class="tag">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Base>
+
+<style>
+  .grid-page {
+    padding: 4rem 1rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .card {
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    cursor: crosshair;
+    transition: background 0.2s;
+
+    &:hover {
+      text-decoration: none;
+      background: #111;
+
+      & .card-title {
+        color: var(--accent);
+      }
+
+      & .card-preview {
+        border-color: var(--accent);
+      }
+    }
+  }
+
+  .card-preview {
+    aspect-ratio: 16 / 10;
+    background: #050505;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .card-preview-inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .card-title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .card-desc {
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+    line-height: 1.5;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .card-date {
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+    white-space: nowrap;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    justify-content: flex-end;
+  }
+
+  .tag {
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+    border: 1px solid var(--border);
+    padding: 0.1rem 0.4rem;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-page {
+      padding: 3.5rem 0 0;
+    }
+  }
+</style>
